@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Encapsulate field &apos;com.service.spring.domain.Product.views&apos; in &apos;com.service.spring.domain.Product&apos;&#x0D;&#x0A;- Original project: &apos;BSBZ_BE&apos;&#x0D;&#x0A;- Original element: &apos;com.service.spring.domain.Product.views&apos;&#x0D;&#x0A;- Getter method name: &apos;getViews&apos;&#x0D;&#x0A;- Setter method name: &apos;setViews&apos;&#x0D;&#x0A;- Field visibility: &apos;public&apos;&#x0D;&#x0A;- Use getter and setter methods in declaring type" comments="false" declaring="true" description="Encapsulate field &apos;views&apos;" flags="589830" getter="getViews" id="org.eclipse.jdt.ui.self.encapsulate" input="/src\/main\/java&lt;com.service.spring.domain{Product.java[Product^views" insertion="26" setter="setViews" stamp="1693980987848" version="1.0" visibility="1"/>
+</session>
