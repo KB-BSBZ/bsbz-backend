@@ -1,9 +1,0 @@
-package model;
-
-import domain.Product;
-import domain.User;
-
-public interface TradeLogDAO {
-	// 유저 id, 상품 id, 구매 수량 ... User 구매 횟수 += 1, Product royal -= tradeRoyalCnt
-	void trade(User user, Product product, int tradeRoyalCnt);
-}
