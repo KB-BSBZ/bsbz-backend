@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sql.pms.mapper">
+
+	<insert id="insert" parameterType="phone">
+		INSERT
+		INTO phones(num, model,
+		price, vcode)
+		VALUES(#{num},#{model},#{price},#{vcode})
+	</insert>
+
+	<!-- login 으로 아이디 지정 안한 이유 :: 동적 쿼리 -->
+	<select id="selectUser" parameterType="userInfo"
+		resultType="userInfo">
+		SELECT id, pw
+		FROM userinfo
+		WHERE id=#{id}
+		<if test="pw!=null">
+			AND pw = #{pw}
+		</if>
+	</select>
+
+	<resultMap type="phone" id="phoneWithCompany">
+		<id column="num" property="num" />
+		<id column="model" property="model" />
+		<id column="price" property="price" />
+		<id column="vcode" property="vcode" />
+		<association property="company" javaType="company">
+			<id column="vcode" property="vcode" />
+			<id column="vendor" property="vendor" />
+		</association>
+	</resultMap>
+
+	<!-- 모든 폰 조회하기 & 특정 폰 조회하기 :: JOIN 사용 -->
+	<!-- SqlSession(SqlSessionTemplate)::selectList(), selectOne() -->
+	<select id="select" parameterType="phone"
+		resultMap="phoneWithCompany">
+		SELECT p.num, p.model, p.price, p.vcode, c.vendor
+		FROM phones p
+		JOIN
+		company c ON (p.vcode=c.vcode)
+		<if test="num!=null">
+			WHERE num=#{num}
+		</if>
+	</select>
+
+	<delete id="delete" parameterType="list">
+		DELETE FROM phones
+		WHERE num IN
+		<foreach collection="list" item="num" open="(" close=")"
+			separator=",">
+			#{num}
+		</foreach>
+	</delete>
+	
+	<!-- RestController 추가 부분 -->
+	<update id="update" parameterType="phone">
+		UPDATE phones
+		SET model=#{model}, price=#{price}, vcode=#{vcode}
+		WHERE num=#{num}
+	</update>
+</mapper>
