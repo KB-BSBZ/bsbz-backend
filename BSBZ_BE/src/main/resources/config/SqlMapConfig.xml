@@ -13,9 +13,10 @@
 		<package name="com.service.spring.domain" />
 	</typeAliases>
 
-
-<!-- 	<mappers>
-		<mapper resource="mapper/phone_query.xml" />
-	</mappers> -->
+	<mappers>
+		<mapper resource="mapper/product_query.xml" />
+		<mapper resource="mapper/tradelog_query.xml" />
+		<mapper resource="mapper/user_query.xml" />
+	</mappers>
 
 </configuration>

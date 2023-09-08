@@ -1,10 +1,9 @@
 package com.service.spring.domain;
 
-
 public class TradeLog {
 	private int tradelogId;
 	private int productId;
-	private int userId;
+	private String userId;
 
 	private String tradeDate;
 	private int tradeRoyalCnt;
@@ -25,11 +24,11 @@ public class TradeLog {
 		this.productId = productId;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sql.user.mapper">
+
+	<!-- 회원가입 -->
+	<insert id="register" parameterType="user">
+		INSERT
+		INTO users (user_id,
+		password, email, user_name, ssn, phone_num)
+		VALUES (#{userId},
+		#{password}, #{email}, #{userName}, #{ssn},
+		#{phoneNum})
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="selectUser" parameterType="user" resultType="user">
+		SELECT user_id, password
+		FROM users
+		WHERE user_id=#{userId}
+		<if test="password!=null">
+			AND password = #{password}
+		</if>
+	</select>
+
+	<!-- 아이디 중복 확인 -->
+	<select id="idExist" resultType="string" parameterType="string">
+		SELECT
+		user_id
+		FROM users WHERE user_id=#{VALUE}
+	</select>
+
+	<!-- 회원정보 수정 -->
+	<update id="update" parameterType="user">
+		UPDATE users SET
+		password=#{password},
+		email=#{email},
+		phone_num=#{phoneNum}
+		WHERE
+		user_id=#{userId}
+	</update>
+
+	<insert id="addExternalAccount" parameterType="externalAccount">
+		<selectKey order="BEFORE" keyProperty="externalAccount" resultType="int">
+			select ExternalAccount_seq.nextval from dual
+		</selectKey>
+		INSERT
+		INTO
+		externalaccount
+		(externalaccount_id,user_id, ex_account)
+		VALUES (#{externalAccount},#{userId},
+		#{exAccount})
+	</insert>
+
+	<delete id="deleteExternalAccount"
+		parameterType="externalAccount">
+		DELETE
+		externalaccount
+		WHERE ex_account = #{exAccount} AND
+		user_id=#{userId}
+	</delete>
+
+	<!-- 보유 상품 보여주기 -->
+	<select id="ownProducts">
+		SELECT
+	</select>
+
+</mapper>

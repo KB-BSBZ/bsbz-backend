@@ -14,10 +14,13 @@ public interface UserDAO {
 	User login(User user) throws Exception;
 
 	// 아이디 중복 확인
-	Boolean idExist(String id) throws Exception;
+	String idExist(String id) throws Exception;
 
 	// 계좌 등록(계좌 수정 ... )
-	void updateExternalAccount(User user, String exAccount);
+	void addExternalAccount(User user, String exAccount);
+
+	// 계좌 삭제
+	void deleteExternalAccount(User user, String exAccount);
 
 	// 회원 정보 수정 ... 비밀번호, 번호, 계좌 수정XXXX
 	void updateUserInfo(User user);

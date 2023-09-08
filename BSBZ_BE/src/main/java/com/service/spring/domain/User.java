@@ -1,6 +1,5 @@
 package com.service.spring.domain;
 
-
 public class User {
 	private String userId;
 	private String password;

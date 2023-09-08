@@ -1,3 +1,21 @@
 1693980987848	Encapsulate field 'views'
 1694065396188	Delete element
 1694065892922	Rename package 'com.service.spring.model'
+1694066982405	Copy compilation units
+1694066990056	Rename type 'BBAccountDAO'
+1694066997720	Rename type 'ProductDAO'
+1694067011538	Rename type 'TradeLogDAO'
+1694067019494	Rename type 'UserDAO'
+1694070729433	Rename package 'com.service.spring.model.impl'
+1694072424662	Copy file
+1694072431907	Copy file
+1694072439158	Copy file
+1694072454228	Delete element
+1694073493974	Delete element
+1694073683173	Delete element
+1694138372949	Copy compilation unit
+1694139565538	Copy packages
+1694140132229	Copy packages
+1694140186096	Copy files
+1694145196009	Delete element
+1694145232225	Rename compilation unit 'unitTest.java'

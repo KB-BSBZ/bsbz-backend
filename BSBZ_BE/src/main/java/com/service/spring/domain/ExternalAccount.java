@@ -1,40 +1,38 @@
 package com.service.spring.domain;
 
-
 public class ExternalAccount {
 
-	private String exAccount1;
-	private String exAccount2;
-	private String exAccount3;
+	private String userId;
+	private String exAccount;
 
-	public String getExAccount1() {
-		return this.exAccount1;
+	public ExternalAccount() {
+	};
+
+	public ExternalAccount(String userId, String exAccount) {
+		super();
+		this.userId = userId;
+		this.exAccount = exAccount;
 	}
 
-	public void setExAccount1(String exAccount1) {
-		this.exAccount1 = exAccount1;
+	public String getUserId() {
+		return userId;
 	}
 
-	public String getExAccount2() {
-		return this.exAccount2;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public void setExAccount2(String exAccount2) {
-		this.exAccount2 = exAccount2;
+	public String getExAccount() {
+		return exAccount;
 	}
 
-	public String getExAccount3() {
-		return this.exAccount3;
-	}
-
-	public void setExAccount3(String exAccount3) {
-		this.exAccount3 = exAccount3;
+	public void setExAccount(String exAccount) {
+		this.exAccount = exAccount;
 	}
 
 	@Override
 	public String toString() {
-		return "ExternalAccount [exAccount1=" + exAccount1 + ", exAccount2=" + exAccount2 + ", exAccount3=" + exAccount3
-				+ "]";
+		return "ExternalAccount [userId=" + userId + ", exAccount=" + exAccount + "]";
 	}
 
 }
