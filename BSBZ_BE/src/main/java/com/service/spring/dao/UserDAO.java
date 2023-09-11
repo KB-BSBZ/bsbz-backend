@@ -2,7 +2,6 @@ package com.service.spring.dao;
 
 import java.util.List;
 
-import com.service.spring.domain.Product;
 import com.service.spring.domain.TradeLog;
 import com.service.spring.domain.User;
 
@@ -25,6 +24,9 @@ public interface UserDAO {
 
 	// 회원 정보 수정 ... 비밀번호, 번호, 계좌 수정XXXX
 	void updateUserInfo(User user);
+	
+	//회원 정보 조회 ...
+	User userInfo(User user);
 
 	// 구매 이력
 	List<TradeLog> userTradeLog(User user);

@@ -22,7 +22,7 @@
 
 	<!-- 로그인 -->
 	<select id="selectUser" parameterType="user" resultType="user">
-		SELECT user_id, password
+		SELECT user_id, password, email, user_name, ssn, phone_num
 		FROM users
 		WHERE user_id=#{userId}
 		<if test="password!=null">
@@ -87,16 +87,8 @@
 		</association>
 	</resultMap>
 
-<!-- 	<select id="ownProducts" parameterType="user" resultMap="tradeLogWithProduct">
-		SELECT SUM(t.trade_royal_cnt) t.trade_royal_cnt, p.product_name,p.product_type,p.product_cost,
-		p.bonus,p.total_royal, p.left_royal,p.register_date, p.end_date, p.extra, p.views
-		FROM product p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
-		WHERE p.product_id=t.product_id
-		GROUP BY(p.product_name,p.product_type,p.product_cost,
-		p.bonus,p.total_royal, p.left_royal,p.register_date, p.end_date, p.extra, p.views);
-	</select>
 	
-	구매 로그 보기
+	<!-- 구매 로그 보기 -->
  	<select id="userTradeLog" parameterType="user" resultMap="tradeLogWithProduct">
 		SELECT t.tradelog_id,t.product_id, t.user_id,t.trade_date, t.trade_royal_cnt, p.product_id, p.product_name,p.product_type,p.product_cost,
 			p.bonus,p.total_royal, p.left_royal,p.register_date, p.end_date, p.extra, p.views
@@ -104,14 +96,14 @@
 		WHERE p.product_id=t.product_id
 	</select>
 	
-	총 로얄 수
+	<!-- 총 로얄 수 -->
 	<select id="totalRoyals" parameterType="user" resultType="int">
 		SELECT SUM(t.trade_royal_cnt)
 		FROM product p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
 		WHERE p.product_id=t.product_id
-	</select> -->
+	</select>
 	
-<select id="ownProducts" parameterType="user" resultMap="tradeLogWithProduct">	    
+	<select id="ownProducts" parameterType="user" resultMap="tradeLogWithProduct">	    
 	     SELECT DISTINCT t.userId, p.product_id, p.product_name,p.product_type,p.product_cost,
 	    p.bonus,p.total_royal, p.left_royal,p.register_date, p.end_date, p.extra, p.views,
         SUM(t.trade_royal_cnt) OVER(PARTITION BY p.product_name) trade_royal_cnt

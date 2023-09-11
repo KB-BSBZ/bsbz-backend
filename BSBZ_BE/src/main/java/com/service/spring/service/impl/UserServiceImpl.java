@@ -80,4 +80,9 @@ public class UserServiceImpl implements UserService {
 		return 0;
 	}
 
+	@Override
+	public User userInfo(User user) {
+		return userDAO.userInfo(user);
+	}
+
 }

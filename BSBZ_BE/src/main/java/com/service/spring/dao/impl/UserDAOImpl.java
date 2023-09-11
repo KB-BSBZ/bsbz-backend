@@ -91,4 +91,9 @@ public class UserDAOImpl implements UserDAO {
 		return 0;
 	}
 
+	@Override
+	public User userInfo(User user) {
+		return sqlSession.selectOne(NS+"selectUser",user);
+	}
+
 }
