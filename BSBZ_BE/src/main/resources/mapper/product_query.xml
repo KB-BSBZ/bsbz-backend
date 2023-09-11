@@ -19,17 +19,15 @@
 
 	<!-- 상품 필터링 -->
 	<sql id="order-product">
-		<choose>
-			<when test="#{VALUE.equals('조회수')}">
-				ORDER BY views DESC
-			</when>
-			<when test="#{VALUE.equals('마감')}">
-				ORDER BY left_royal DESC
-			</when>
-			<otherwise>
-				ORDER BY register_date
-			</otherwise>
-		</choose>
+		<if test="_parameter.equals('조회수')">
+			ORDER BY views DESC
+		</if>
+		<if test="_parameter.equals('마감')">
+			ORDER BY left_royal
+		</if>
+		<if test="_parameter.equals('')">
+			ORDER BY register_date
+		</if>
 	</sql>
 
 	<!-- 전체 상품 보여주기 -->
