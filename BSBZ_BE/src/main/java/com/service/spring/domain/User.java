@@ -9,6 +9,20 @@ public class User {
 	private String ssn;
 	private String phoneNum;
 	private int tradeCnt;
+	
+	public User() {};
+	
+	public User(String userId, String password, String email, String userName, String ssn, String phoneNum,
+			int tradeCnt) {
+		super();
+		this.userId = userId;
+		this.password = password;
+		this.email = email;
+		this.userName = userName;
+		this.ssn = ssn;
+		this.phoneNum = phoneNum;
+		this.tradeCnt = tradeCnt;
+	}
 
 	public String getUserId() {
 		return userId;

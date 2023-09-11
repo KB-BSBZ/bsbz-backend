@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sql.tradelog.mapper">
+	<insert id="addTradeLog" parameterType="tradeLog">
+        <selectKey order="BEFORE" keyProperty="tradelogId" resultType="int">
+            select tradelog_id_seq.nextval from dual
+        </selectKey>
+        INSERT
+        INTO TradeLog
+        (tradelog_id, trade_date, user_id, product_id, trade_royal_cnt)
+        VALUES (#{tradelogId},sysdate,#{userId},#{productId},#{tradeRoyalCnt})
+    </insert>
+    
+<!--     구매/환불 기록 추가시 회원 거래 횟수 +1 -->
+    <update id="updateTradeCnt" parameterType="tradelog">
+        UPDATE users SET
+        trade_cnt=trade_cnt+1
+        WHERE
+        user_id=#{userId}
+    </update>
+    
+<!--         구매/환불 기록 추가시 상품 로얄수 -1 -->
+    <update id="updateLeftRoyal" parameterType="tradelog">
+        UPDATE product SET
+        left_royal=left_royal-#{tradeRoyalCnt}
+        WHERE
+        product_id=#{productId}
+    </update>
+</mapper>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sql.user.mapper">
+
+	<!-- 회원가입 -->
+	<insert id="register" parameterType="user">
+		INSERT
+		INTO users (user_id, password, email, user_name, ssn, phone_num)
+		VALUES (#{userId}, #{password}, #{email}, #{userName}, #{ssn}, #{phoneNum})
+	</insert>
+	
+	<insert id="register_bbAccount" parameterType="bbAccount">
+		<selectKey order="BEFORE" keyProperty="bbAccount" resultType="int">
+            select bbaccount_seq.nextval from dual
+        </selectKey>
+		INSERT
+		INTO bbAccount (bb_account, user_id,balance)
+		VALUES (#{bbAccount}, #{userId},#{balance})
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="selectUser" parameterType="user" resultType="user">
+		SELECT user_id, password
+		FROM users
+		WHERE user_id=#{userId}
+		<if test="password!=null">
+			AND password = #{password}
+		</if>
+	</select>
+
+	<!-- 아이디 중복 확인 -->
+	<select id="idExist" resultType="string" parameterType="string">
+		SELECT user_id
+		FROM users WHERE user_id=#{VALUE}
+	</select>
+
+	<!-- 회원정보 수정 -->
+	<update id="update" parameterType="user">
+		UPDATE users SET
+		password=#{password},
+		email=#{email},
+		phone_num=#{phoneNum}
+		WHERE
+		user_id=#{userId}
+	</update>
+
+	<insert id="addExternalAccount" parameterType="externalAccount">
+		<selectKey order="BEFORE" keyProperty="externalAccountId" resultType="int">
+			select ExternalAccout_seq.nextval from dual
+		</selectKey>
+		INSERT
+		INTO ExternalAccout
+		(externalaccount_id,user_id, ex_account)
+		VALUES (#{externalAccountId},#{userId},#{exAccount})
+	</insert>
+
+	<delete id="deleteExternalAccount" parameterType="externalAccount">
+		DELETE
+		ExternalAccout
+		WHERE ex_account = #{exAccount} AND
+		user_id=#{userId}
+	</delete>
+
+	<resultMap type="tradeLog" id="tradeLogWithProduct">
+		<id property="tradelogId" column="tradelog_id" />
+		<result property="tradeDate" column="trade_date" />
+		<result property="userId" column="user_id" />
+		<result property="productId" column="product_id" />
+		<result property="tradeRoyalCnt" column="trade_royal_cnt" />
+		<association property="product" javaType="product">
+			<id property="productId" column="product_id" />
+			<result property="productName" column="product_name" />
+			<result property="productType" column="product_type" />
+			<result property="productCost" column="product_cost" />
+			<result property="bonus" column="bonus" />
+			<result property="totalRoyal" column="total_royal" />
+			<result property="leftRoyal" column="left_royal" />
+			<result property="registerDate" column="register_date" />
+			<result property="endDate" column="end_date" />
+			<result property="description" column="description" />
+			<result property="profileUrl" column="profile_url" />
+			<result property="imageUrl" column="image_url" />
+			<result property="extra" column="extra" />
+			<result property="views" column="views" />
+		</association>
+	</resultMap>
+
+<!-- 	<select id="ownProducts" parameterType="user" resultMap="tradeLogWithProduct">
+		SELECT SUM(t.trade_royal_cnt) t.trade_royal_cnt, p.product_name,p.product_type,p.product_cost,
+		p.bonus,p.total_royal, p.left_royal,p.register_date, p.end_date, p.extra, p.views
+		FROM product p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
+		WHERE p.product_id=t.product_id
+		GROUP BY(p.product_name,p.product_type,p.product_cost,
+		p.bonus,p.total_royal, p.left_royal,p.register_date, p.end_date, p.extra, p.views);
+	</select>
+	
+	구매 로그 보기
+ 	<select id="userTradeLog" parameterType="user" resultMap="tradeLogWithProduct">
+		SELECT t.tradelog_id,t.product_id, t.user_id,t.trade_date, t.trade_royal_cnt, p.product_id, p.product_name,p.product_type,p.product_cost,
+			p.bonus,p.total_royal, p.left_royal,p.register_date, p.end_date, p.extra, p.views
+		FROM product p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
+		WHERE p.product_id=t.product_id
+	</select>
+	
+	총 로얄 수
+	<select id="totalRoyals" parameterType="user" resultType="int">
+		SELECT SUM(t.trade_royal_cnt)
+		FROM product p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
+		WHERE p.product_id=t.product_id
+	</select> -->
+	
+<select id="ownProducts" parameterType="user" resultMap="tradeLogWithProduct">	    
+	     SELECT DISTINCT t.userId, p.product_id, p.product_name,p.product_type,p.product_cost,
+	    p.bonus,p.total_royal, p.left_royal,p.register_date, p.end_date, p.extra, p.views,
+        SUM(t.trade_royal_cnt) OVER(PARTITION BY p.product_name) trade_royal_cnt
+	    FROM product p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
+	    WHERE p.product_id=t.product_id
+	</select>
+
+
+</mapper>

@@ -4,10 +4,38 @@ package com.service.spring.domain;
 public class TradeLog {
 	private int tradelogId;
 	private int productId;
-	private int userId;
+	private String userId;
 
 	private String tradeDate;
 	private int tradeRoyalCnt;
+	
+	private Product product;
+	
+	public TradeLog(int tradelogId, int productId, String userId, String tradeDate, int tradeRoyalCnt,
+			Product product) {
+		super();
+		this.tradelogId = tradelogId;
+		this.productId = productId;
+		this.userId = userId;
+		this.tradeDate = tradeDate;
+		this.tradeRoyalCnt = tradeRoyalCnt;
+		this.product = product;
+	}
+
+	public TradeLog() {};
+	
+	public TradeLog(int productId, String userId, int tradeRoyalCnt) {
+		this.productId = productId;
+		this.userId = userId;
+		this.tradeRoyalCnt = tradeRoyalCnt;
+	}
+	
+	public TradeLog(int tradelogId, int productId, String userId, int tradeRoyalCnt) {
+		this.tradelogId = tradelogId;
+		this.productId = productId;
+		this.userId = userId;
+		this.tradeRoyalCnt = tradeRoyalCnt;
+	}
 
 	public int getTradelogId() {
 		return this.tradelogId;
@@ -25,11 +53,11 @@ public class TradeLog {
 		this.productId = productId;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -49,10 +77,19 @@ public class TradeLog {
 		this.tradeRoyalCnt = tradeRoyalCnt;
 	}
 
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
 	@Override
 	public String toString() {
 		return "TradeLog [tradelogId=" + tradelogId + ", productId=" + productId + ", userId=" + userId + ", tradeDate="
-				+ tradeDate + ", tradeRoyalCnt=" + tradeRoyalCnt + "]";
+				+ tradeDate + ", tradeRoyalCnt=" + tradeRoyalCnt + ", \n" + product + "]\n";
 	}
 
+	
 }
