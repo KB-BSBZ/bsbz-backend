@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sql.account.mapper">
+	<!-- 잔액 조회 -->
+	<sql id="select-product">
+		SELECT
+		profile_url,
+		product_name,
+		total_royal,
+		left_royal,
+		end_date
+		FROM
+		product
+	</sql>
+
+	<select id="showBalance" parameterType="user" resultType="int">
+		SELECT balance
+		FROM bbAccount
+		WHERE user_id = #{userId}
+	</select>
+	
+	<update id="update" parameterType="bbAccount">
+		UPDATE bbAccount
+		SET balance=balance+#{amount}
+		WHERE user_id=#{userId}
+	</update>
+
+
+</mapper>

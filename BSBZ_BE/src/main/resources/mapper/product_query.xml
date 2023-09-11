@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sql.product.mapper">
+
+	<!-- 상품 조회 -->
+	<sql id="select-product">
+		SELECT
+		product_id,
+		profile_url,
+		product_name,
+		total_royal,
+		left_royal,
+		end_date
+		FROM
+		product
+	</sql>
+
+	<!-- 상품 필터링 -->
+	<sql id="order-product">
+		<choose>
+			<when test="#{VALUE.equals('조회수')}">
+				ORDER BY views DESC
+			</when>
+			<when test="#{VALUE.equals('마감')}">
+				ORDER BY left_royal DESC
+			</when>
+			<otherwise>
+				ORDER BY register_date
+			</otherwise>
+		</choose>
+	</sql>
+
+	<!-- 전체 상품 보여주기 -->
+	<select id="showAllProducts" parameterType="string"
+		resultType="product">
+		<include refid="select-product" />
+	</select>
+
+	<!-- 미술품 -->
+	<select id="showAllArts" parameterType="string"
+		resultType="product">
+		<include refid="select-product" />
+		WHERE product_type LIKE '%' || '미술' || '%'
+		<include refid="order-product" />
+	</select>
+
+	<!-- 럭셔리 -->
+	<select id="showAllLuxuries" parameterType="string"
+		resultType="product">
+		<include refid="select-product" />
+		WHERE product_type LIKE '%' || '럭셔리' || '%'
+		<include refid="order-product" />
+	</select>
+
+	<!-- 부동산 -->
+	<select id="showAllRealEstate" parameterType="string"
+		resultType="product">
+		<include refid="select-product" />
+		WHERE product_type LIKE '%' || '부동산' || '%'
+		<include refid="order-product" />
+	</select>
+
+	<!-- 음악 저작권 -->
+	<select id="showAllMusicCopyright" parameterType="string"
+		resultType="product">
+		<include refid="select-product" />
+		WHERE product_type LIKE '%' || '저작권' || '%'
+		<include refid="order-product" />
+	</select>
+
+	<!-- 상품 디테일 정보 -->
+	<select id="showDetail" parameterType="product"
+		resultType="product">
+		SELECT
+		product_id,
+		product_name,
+		product_type,
+		product_cost,
+		total_royal,
+		left_royal,
+		register_date,
+		end_date,
+		description,
+		profile_url,
+		image_url,
+		extra
+		FROM
+		product
+		WHERE
+		product_id=#{productId}
+	</select>
+
+	<update id="updateProductInfo" parameterType="product">
+		UPDATE product SET
+		profile_url=#{profileUrl},
+		image_url=#{imageUrl},
+		extra=#{extra}
+		WHERE
+		product_id=#{productId}
+	</update>
+
+</mapper>

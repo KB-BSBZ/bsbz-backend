@@ -7,7 +7,7 @@ public class Product {
 	private int productCost;
 	private int bonus;
 	private int totalRoyal;
-	private int leftRotal;
+	private int leftRoyal;
 	private String registerDate;
 	private String endDate;
 	private String description;
@@ -64,12 +64,12 @@ public class Product {
 		this.totalRoyal = totalRoyal;
 	}
 
-	public int getLeft_rotal() {
-		return this.leftRotal;
+	public int getLeft_royal() {
+		return this.leftRoyal;
 	}
 
-	public void setLeft_rotal(int left_rotal) {
-		this.leftRotal = left_rotal;
+	public void setLeft_royal(int leftRoyal) {
+		this.leftRoyal = leftRoyal;
 	}
 
 	public String getRegisterDate() {
@@ -131,8 +131,8 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", productName=" + productName + ", productType=" + productType
-				+ ", productCost=" + productCost + ", bonus=" + bonus + ", totalRoyal=" + totalRoyal + ", leftRotal="
-				+ leftRotal + ", registerDate=" + registerDate + ", endDate=" + endDate + ", description=" + description
+				+ ", productCost=" + productCost + ", bonus=" + bonus + ", totalRoyal=" + totalRoyal + ", leftRoyal="
+				+ leftRoyal + ", registerDate=" + registerDate + ", endDate=" + endDate + ", description=" + description
 				+ ", profileUrl=" + profileUrl + ", imageUrl=" + imageUrl + ", extra=" + extra + ", views=" + views
 				+ "]";
 	}
