@@ -15,6 +15,12 @@ public class Product {
 	private String imageUrl;
 	private String extra;
 	private int views;
+	
+	public Product() {};
+	
+	public Product(int productId) {
+		this.productId = productId;
+	}
 
 	public int getProductId() {
 		return this.productId;

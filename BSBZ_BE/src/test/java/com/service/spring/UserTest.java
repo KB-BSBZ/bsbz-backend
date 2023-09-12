@@ -37,9 +37,9 @@ public class UserTest {
 		user.setPhoneNum("010-2345-0000");
 
 		Product product = new Product();
-		product.setProductId(11);
+		product.setProductId(1);
 
-		System.out.println("========1-1. ID Exist ==============");
+/*		System.out.println("========1-1. ID Exist ==============");
 		// 아이디 중복 확인
 		System.out.println("아이디 중복 확인" + userDAO.idExist("jsw9696"));
 		// 회원가입
@@ -74,13 +74,13 @@ public class UserTest {
 		user1.setPhoneNum("010-0000-0000");
 		System.out.println("수정할 회원 정보" + user.toString());
 		userDAO.updateUserInfo(user1);
-		System.out.println("회원정보 수정 완료");
+		System.out.println("회원정보 수정 완료");*/
 
 		System.out.println("========5. 거래 진행합니다 ==============");
 		tradeLogDAO.trade(user, product, 15);
 		tradeLogDAO.trade(user, product, -5);
 
-		System.out.println("========6. 구매한 내역 전부 출력 ==============");
+/*		System.out.println("========6. 구매한 내역 전부 출력 ==============");
 		List<TradeLog> temp = userDAO.userTradeLog(user);
 		for (TradeLog t : temp) {
 			System.out.println(t.toString());
@@ -94,5 +94,7 @@ public class UserTest {
 			System.out.println(t.toString());
 		}
 		userDAO.deleteUser(user);
+		*/
+		
 	}
 }

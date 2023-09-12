@@ -12,6 +12,10 @@ public class User {
 	
 	public User() {};
 	
+	public User(String userId) {
+		this.userId = userId;
+	}
+	
 	public User(String userId, String password, String email, String userName, String ssn, String phoneNum,
 			int tradeCnt) {
 		super();

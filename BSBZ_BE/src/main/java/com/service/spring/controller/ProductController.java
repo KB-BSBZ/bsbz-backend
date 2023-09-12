@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -162,26 +163,12 @@ public class ProductController {
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<String> updateProductInfo(@RequestParam("productId") int productId) {
+	public ResponseEntity<String> updateProductInfo(@RequestBody Product product) {
 
 		try {
-			System.out.println("상품 로얄 수 업데이트 컨트롤러 진입 성공");
-
-			// 파라미터 잘 받았는지 확인
-			System.out.println("productId :: " + productId);
-
-			// 리엑트에서는 productId int 값 하나만 넘겨줘서 객체 생성 후 상세정보 로직에 접근해야함
-			Product product = new Product();
-			product.setProductId(productId);
-			System.out.println("객체 생성 후 파라미터 주입 완료 / 상품 id = " + product.getProductId());
-
-			// 로직 진입 전
-			System.out.println("정보 수정 로직 진입 전");
+			
 			productService.updateProductInfo(product);
-			System.out.println("정보 수정 로직 진입 후");
 
-			// 리엑트로 응답하기
-			System.out.println("정보 수정 성공");
 			return new ResponseEntity(HttpStatus.OK);
 		} catch (Exception e) {
 			// 실패 시 응답 (예: BadRequest)

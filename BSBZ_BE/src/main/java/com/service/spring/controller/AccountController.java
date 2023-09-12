@@ -30,7 +30,7 @@ public class AccountController {
 	private BBAccountService bbAccountService;
 
 	// 모든 매핑 하는 부분 파라미터 중괄호로 감싼거 고쳐야함
-	@PutMapping("/deposit/{amt}")
+	@PutMapping("/deposit")
 	public ResponseEntity<String> deposit(@RequestBody User user, int amt) {
 
 		try {

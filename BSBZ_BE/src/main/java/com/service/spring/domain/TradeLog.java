@@ -1,11 +1,10 @@
 package com.service.spring.domain;
 
-
 public class TradeLog {
 	private int tradelogId;
 	private int productId;
 	private String userId;
-
+	
 	private String tradeDate;
 	private int tradeRoyalCnt;
 	
