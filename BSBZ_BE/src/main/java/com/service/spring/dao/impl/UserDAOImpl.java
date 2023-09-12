@@ -95,5 +95,10 @@ public class UserDAOImpl implements UserDAO {
 	public User userInfo(User user) {
 		return sqlSession.selectOne(NS+"selectUser",user);
 	}
+	
+	@Override
+	public void deleteUser(User user) throws Exception {
+		sqlSession.delete(NS + "delete", user);
+	}
 
 }

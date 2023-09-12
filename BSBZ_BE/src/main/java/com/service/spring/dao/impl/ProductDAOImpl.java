@@ -18,8 +18,8 @@ public class ProductDAOImpl implements ProductDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<Product> showAllProducts() throws Exception {
-		return sqlSession.selectList(NS + "showAllProducts");
+	public List<Product> showAllProducts(String orderType) throws Exception {
+		return sqlSession.selectList(NS + "showAllProducts", orderType);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public Product showDetail(Product product) throws Exception {
-		System.out.println(product.getProductId());
+		//System.out.println(product.getProductId());
 		return sqlSession.selectOne(NS + "showDetail", product);
 	}
 

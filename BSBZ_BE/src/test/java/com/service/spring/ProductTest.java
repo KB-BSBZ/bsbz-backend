@@ -21,7 +21,7 @@ public class ProductTest {
 	@Test
 	public void unitTest() throws Exception {
 		// 전체 상품 조회
-		List<Product> temp2 = productDAO.showAllProducts();
+		List<Product> temp2 = productDAO.showAllProducts("");
 		for(Product t : temp2) {
 			System.out.println(t.toString());
 		}

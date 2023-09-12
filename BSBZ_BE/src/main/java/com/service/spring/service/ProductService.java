@@ -6,7 +6,7 @@ import com.service.spring.domain.Product;
 public interface ProductService {
 
 	// 전체 상품 보기
-	List<Product> showAllProducts() throws Exception;
+	List<Product> showAllProducts(String orderType) throws Exception;
 
 	// 카테고리별 상품 보기
 	List<Product> showAllArts(String orderType) throws Exception;

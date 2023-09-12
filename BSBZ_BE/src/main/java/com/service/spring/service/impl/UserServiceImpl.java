@@ -84,5 +84,10 @@ public class UserServiceImpl implements UserService {
 	public User userInfo(User user) {
 		return userDAO.userInfo(user);
 	}
+	
+	@Override
+	public void deleteUser(User user) throws Exception {
+		userDAO.deleteUser(user);
+	}
 
 }

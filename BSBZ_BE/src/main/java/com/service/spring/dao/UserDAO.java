@@ -42,4 +42,7 @@ public interface UserDAO {
 
 	// 자산 보유 순위 ... 구매 횟수로 백분율 나눠서 ...
 	int userRanking(User user);
+	
+	// 회원 탈퇴
+	void deleteUser(User user) throws Exception;
 }

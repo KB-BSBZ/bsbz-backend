@@ -17,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDAO productDAO;
 
 	@Override
-	public List<Product> showAllProducts() throws Exception {
-		return productDAO.showAllProducts();
+	public List<Product> showAllProducts(String orderType) throws Exception {
+		return productDAO.showAllProducts(orderType);
 	}
 
 	@Override
@@ -43,14 +43,12 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product showDetail(Product product) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return productDAO.showDetail(product);
 	}
 
 	@Override
 	public void updateProductInfo(Product product) throws Exception {
-		// TODO Auto-generated method stub
-
+		productDAO.updateProductInfo(product);
 	}
 
 	@Override
