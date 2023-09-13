@@ -42,6 +42,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public List<Product> searchProduct(String word) throws Exception {
+		return productDAO.searchProduct(word);
+	}
+
+	@Override
 	public Product showDetail(Product product) throws Exception {
 		return productDAO.showDetail(product);
 	}

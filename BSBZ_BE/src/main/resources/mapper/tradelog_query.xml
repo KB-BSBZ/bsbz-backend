@@ -11,6 +11,7 @@
         INTO TradeLog
         (tradelog_id, trade_date, product_id, user_id, trade_royal_cnt)
         VALUES (#{tradelogId},sysdate,#{productId}, #{userId}, #{tradeRoyalCnt})
+        VALUES (#{tradelogId},sysdate,#{productId}, #{userId},#{tradeRoyalCnt})
     </insert>
     
 <!--     구매/환불 기록 추가시 회원 거래 횟수 +1 -->

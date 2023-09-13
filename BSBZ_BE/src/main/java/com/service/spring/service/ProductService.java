@@ -17,6 +17,9 @@ public interface ProductService {
 
 	List<Product> showAllMusicCopyright(String orderType) throws Exception;
 
+	// 상품 검색
+	List<Product> searchProduct(String word) throws Exception;
+
 	// 상품 상세 정보 보기
 	Product showDetail(Product product) throws Exception;
 

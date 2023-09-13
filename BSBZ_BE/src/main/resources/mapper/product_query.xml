@@ -10,7 +10,6 @@
 		product_id,
 		product_name,
 		product_type,
-		product_cost,
 		total_royal,
 		left_royal,
 		register_date,
@@ -74,6 +73,13 @@
 		<include refid="select-product" />
 		WHERE product_type LIKE '%' || 'music' || '%'
 		<include refid="order-product" />
+	</select>
+
+	<!-- 상품 검색하기 -->
+	<select id="searchProduct" parameterType="string"
+		resultType="product">
+		<include refid="select-product" />
+		WHERE UPPER(product_name) LIKE UPPER('%' || #{VALUE} || '%')
 	</select>
 
 	<!-- 상품 디테일 정보 -->

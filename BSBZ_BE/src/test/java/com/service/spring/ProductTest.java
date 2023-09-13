@@ -19,20 +19,20 @@ public class ProductTest {
 	@Test
 	public void unitTest() throws Exception {
 		// 전체 상품 조회
-		System.out.println("=============== 전체 상품 출력하기 ===============");
-		for (Product t : productDAO.showAllProducts(""))
-			System.out.println(t.toString());
-		System.out.println();
+//		System.out.println("=============== 전체 상품 출력하기 ===============");
+//		for (Product t : productDAO.showAllProducts(""))
+//			System.out.println(t.toString());
+//		System.out.println();
 
-		System.out.println("=============== 음악저작권 ===============");
-		for (Product p : productDAO.showAllMusicCopyright(""))
-			System.out.println(p);
-		System.out.println();
-
-		Product temp = new Product();
-		temp.setProductId(10);
-		System.out.println("=============== 디테일 보기 ===============");
-		System.out.println(productDAO.showDetail(temp));
+//		System.out.println("=============== 음악저작권 ===============");
+//		for (Product p : productDAO.showAllMusicCopyright("마감"))
+//			System.out.println(p);
+//		System.out.println();
+//
+//		Product temp = new Product();
+//		temp.setProductId(10);
+//		System.out.println("=============== 디테일 보기 ===============");
+//		System.out.println(productDAO.showDetail(temp));
 
 		// 정보 수정
 		/*
@@ -43,6 +43,8 @@ public class ProductTest {
 		 * temp1.setImageUrl("수정수정");
 		 */
 		// productDAO.updateProductInfo(temp);
-
+		System.out.println("=============== 검색어로 상품 검색하기 ===============");
+		for (Product p : productDAO.searchProduct("ba"))
+			System.out.println(p);
 	}
 }

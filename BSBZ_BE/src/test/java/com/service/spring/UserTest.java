@@ -94,7 +94,5 @@ public class UserTest {
 			System.out.println(t.toString());
 		}
 		//userDAO.deleteUser(user);
-		
-		
 	}
 }
