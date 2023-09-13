@@ -81,14 +81,12 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public int showBonus(User user) {
-
-		return 0;
+		return sqlSession.selectOne(NS+"showBonus",user);
 	}
 
 	@Override
 	public int userRanking(User user) {
-
-		return 0;
+		return sqlSession.selectOne(NS+"userRanking",user);
 	}
 
 	@Override

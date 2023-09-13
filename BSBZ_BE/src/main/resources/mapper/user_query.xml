@@ -80,7 +80,6 @@
 			<id property="productId" column="product_id" />
 			<result property="productName" column="product_name" />
 			<result property="productType" column="product_type" />
-			<result property="productCost" column="product_cost" />
 			<result property="bonus" column="bonus" />
 			<result property="totalRoyal" column="total_royal" />
 			<result property="leftRoyal" column="left_royal" />
@@ -103,8 +102,7 @@
 		p.bonus,p.total_royal,
 		p.left_royal,p.register_date, p.end_date, p.extra, p.views
 		FROM
-		product
-		p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
+		product p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
 		WHERE
 		p.product_id=t.product_id
 	</select>
@@ -118,10 +116,11 @@
 		WHERE p.product_id=t.product_id
 	</select>
 
+	<!-- 보유하고 있는 품목 로그 -->
 	<select id="ownProducts" parameterType="user"
 		resultMap="tradeLogWithProduct">
 		SELECT DISTINCT t.user_id, p.product_id,
-		p.product_name,p.product_type,p.product_cost,
+		p.product_name,p.product_type,
 		p.bonus,p.total_royal,
 		p.left_royal,p.register_date, p.end_date, p.extra, p.views,
 		SUM(t.trade_royal_cnt) OVER(PARTITION BY p.product_name)
@@ -137,5 +136,22 @@
 		WHERE
 		user_id=#{userId}
 	</delete>
+	
+	<!-- 회원 등수 -->
+	<select id="userRanking" parameterType="user" resultType="int">
+		SELECT t.rate
+		FROM (SELECT user_id, user_name, 100-ROUND(RATIO_TO_REPORT(trade_cnt) OVER(), 2)*100 AS rate
+		FROM users) t
+		WHERE t.user_id=#{userId}
+	</select>
+	
+	<!-- 배당금 출력 -->
+	<select id="showBonus" parameterType="user" resultType="int">
+		SELECT SUM(t.trade_royal_cnt*p.bonus)
+		FROM
+		product p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
+		WHERE p.product_id=t.product_id
+	</select>
+
 
 </mapper>
