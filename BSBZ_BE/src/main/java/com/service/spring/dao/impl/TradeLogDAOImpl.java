@@ -21,17 +21,17 @@ public class TradeLogDAOImpl implements TradeLogDAO {
 	public void trade(User user, Product product, int tradeRoyalCnt) {
 		TradeLog tl = new TradeLog(product.getProductId(), user.getUserId(), tradeRoyalCnt);
 		System.out.println(tl);
-		System.out.println("sqlSession.insert(NS + \"addTradeLog\", tl);");
+
 		sqlSession.insert(NS + "addTradeLog", tl);
 		System.out.println("sqlSession.insert(NS + \"addTradeLog\", tl); 성공");
 		
-		System.out.println("sqlSession.update(NS + \"updateLeftRoyal\", tl);");
 		sqlSession.update(NS + "updateLeftRoyal", tl);
 		System.out.println("sqlSession.update(NS + \"updateLeftRoyal\", tl); 성공");
 		
-		System.out.println("sqlSession.update(NS + \"updateTradeCnt\", tl);");
-		sqlSession.update(NS + "updateTradeCnt", tl);
-		System.out.println("sqlSession.update(NS + \"updateTradeCnt\", tl); 성공");
+		if(tradeRoyalCnt>0) {
+			sqlSession.update(NS + "updateTradeCnt", tl);
+			System.out.println("회원의 거래 횟수가 증가합니다.");
+		}
 	}
 
 }
