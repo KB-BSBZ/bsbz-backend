@@ -166,7 +166,7 @@ public class ProductController {
 	public ResponseEntity<String> updateProductInfo(@RequestBody Product product) {
 
 		try {
-			
+
 			productService.updateProductInfo(product);
 
 			return new ResponseEntity(HttpStatus.OK);

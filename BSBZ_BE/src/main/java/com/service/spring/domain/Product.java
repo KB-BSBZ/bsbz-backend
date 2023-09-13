@@ -4,7 +4,7 @@ public class Product {
 	private int productId;
 	private String productName;
 	private String productType;
-	private int productCost;
+	private long productCost;
 	private int bonus;
 	private int totalRoyal;
 	private int leftRoyal;
@@ -15,9 +15,10 @@ public class Product {
 	private String imageUrl;
 	private String extra;
 	private int views;
-	
-	public Product() {};
-	
+
+	public Product() {
+	};
+
 	public Product(int productId) {
 		this.productId = productId;
 	}
@@ -46,7 +47,7 @@ public class Product {
 		this.productType = productType;
 	}
 
-	public int getProductCost() {
+	public long getProductCost() {
 		return this.productCost;
 	}
 

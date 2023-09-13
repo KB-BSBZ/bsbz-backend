@@ -1,6 +1,8 @@
 package com.service.spring.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,9 +61,11 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> searchProduct(String word) throws Exception {
-		System.out.println(word);
-		return sqlSession.selectList(NS + "searchProduct", word);
+	public List<Product> searchProduct(String word, String orderType) throws Exception {
+		Map<String, String> params = new HashMap<>();
+		params.put("orderType", orderType);
+		params.put("word", word);
+		return sqlSession.selectList(NS + "searchProduct", params);
 	}
 
 }

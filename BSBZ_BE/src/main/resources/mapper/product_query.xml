@@ -9,6 +9,7 @@
 		SELECT
 		product_id,
 		product_name,
+		product_cost,
 		product_type,
 		total_royal,
 		left_royal,
@@ -76,10 +77,19 @@
 	</select>
 
 	<!-- 상품 검색하기 -->
-	<select id="searchProduct" parameterType="string"
+	<select id="searchProduct" parameterType="map"
 		resultType="product">
 		<include refid="select-product" />
-		WHERE UPPER(product_name) LIKE UPPER('%' || #{VALUE} || '%')
+		WHERE UPPER(product_name) LIKE UPPER('%' || #{word} || '%')
+		<if test="orderType.equals('조회수')">
+			ORDER BY views DESC
+		</if>
+		<if test="orderType.equals('마감')">
+			ORDER BY left_royal
+		</if>
+		<if test="orderType == null">
+			ORDER BY register_date
+		</if>
 	</select>
 
 	<!-- 상품 디테일 정보 -->
