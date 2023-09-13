@@ -37,20 +37,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void addExternalAccount(User user, String exAccount) {
-		// TODO Auto-generated method stub
-
+		userDAO.addExternalAccount(user, exAccount);
 	}
 
 	@Override
 	public void deleteExternalAccount(User user, String exAccount) {
-		// TODO Auto-generated method stub
-
+		userDAO.deleteExternalAccount(user, exAccount);
 	}
 
 	@Override
 	public void updateUserInfo(User user) {
-		// TODO Auto-generated method stub
-
+		userDAO.updateUserInfo(user);
 	}
 
 	@Override

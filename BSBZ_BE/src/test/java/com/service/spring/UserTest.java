@@ -30,16 +30,16 @@ public class UserTest {
 		System.out.println("========1. register User ==============");
 		User user = new User();
 		user.setUserId("lcy923");
-		user.setPassword("lcy923");
-		user.setEmail("lcy92345@gmail.com");
+		user.setPassword("jyh9898");
+		user.setEmail("jyh9898@gmail.com");
 		user.setSsn("001234-0000000");
-		user.setUserName("이채영");
+		user.setUserName("조용훈");
 		user.setPhoneNum("010-2345-0000");
 		
 		//userDAO.deleteUser(user);
 		
 		Product product = new Product();
-		product.setProductId(2);
+		product.setProductId(1);
 
 		System.out.println("========1-1. ID Exist ==============");
 		// 아이디 중복 확인
@@ -54,8 +54,11 @@ public class UserTest {
 		// 로그인
 		System.out.println("로그인 확인하겠습니다." + userDAO.login(user));
 		
+		
 		System.out.println("회원님은 상위 " + userDAO.userRanking(user)+"% 입니다.");
-		System.out.println("회원님이 이번 달에 받을 수 있는 배당금은 " + userDAO.showBonus(user)+"원 입니다.");
+		System.out.println("회원님이 이번 달에 받을 수 있는 배당금은 " +
+		userDAO.showBonus(user)+"원 입니다.");
+		 
 /*
 		System.out.println("========3. 외부계좌 등록합니다 ==============");
 		// 외부계좌 등록
@@ -83,11 +86,11 @@ public class UserTest {
 		userDAO.updateUserInfo(user1);
 		System.out.println("회원정보 수정 완료");
 */
-/*
-		System.out.println("========5. 거래 진행합니다 ==============");
-		tradeLogDAO.trade(user, product, 15);
-		tradeLogDAO.trade(user, product, -5);
-*/
+
+		//System.out.println("========5. 거래 진행합니다 ==============");
+		//tradeLogDAO.trade(user, product, 3);
+		//tradeLogDAO.trade(user, product, -1);
+
 /*
 		System.out.println("========6. 구매한 내역 전부 출력 ==============");
 		List<TradeLog> temp = userDAO.userTradeLog(user);
