@@ -1,5 +1,6 @@
 package com.service.spring.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -163,6 +164,40 @@ public class UserController {
 			return ResponseEntity.badRequest().body("보유하고 있는 품목 로그 조회 실패");
 		}
 	}
+	
+	@PostMapping("/ownproducts/graph")
+	public ResponseEntity<String> ownProductsGraph(@RequestBody User user) {
+
+		try {
+			System.out.println("보유하고 있는 품목 로그 조회 로직 실행 전");
+			List<TradeLog> ownProducts = userService.ownProducts(user);
+			System.out.println("보유하고 있는 품목 로그 조회 로직 실행 성공");
+			
+			Map<String, Integer> list = new HashMap<>();
+			list.put("estate", 0);
+	        list.put("music", 0);
+	        list.put("luxury", 0);
+			
+			for(TradeLog p : ownProducts) {
+				if(p.getProduct().getProductType().equals("estate")){
+					list.put("estate", list.get("estate") + 1);
+				}else if(p.getProduct().getProductType().equals("music")) {
+					list.put("music", list.get("music") + 1);
+				}else if(p.getProduct().getProductType().equals("luxury")) {
+					list.put("luxury", list.get("luxury") + 1);
+				}
+			}
+			
+			return new ResponseEntity(list, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			// 실패 시 응답 (예: BadRequest)
+			System.out.println("보유하고 있는 품목 로그 조회 실패...");
+			return ResponseEntity.badRequest().body("보유하고 있는 품목 로그 조회 실패");
+		}
+	}
+	
+	
 	
 	@PostMapping("/totalroyals")
 	public ResponseEntity<String> totalRoyals(@RequestBody User user) {

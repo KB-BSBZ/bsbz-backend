@@ -176,7 +176,7 @@ public class ProductController {
 			return ResponseEntity.badRequest().body("정보 수정 실패...");
 		}
 	}	
-	@GetMapping("/serch")
+	@GetMapping("/search")
 	public ResponseEntity<String> searchProduct(@RequestParam("word") String word, @RequestParam("orderType") String orderType) {
 
 		try {
