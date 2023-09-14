@@ -67,14 +67,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int showBonus(User user) {
-		// TODO Auto-generated method stub
-		return 0;
+		return userDAO.showBonus(user);
 	}
 
 	@Override
 	public int userRanking(User user) {
-		// TODO Auto-generated method stub
-		return 0;
+		return userDAO.userRanking(user);
 	}
 
 	@Override

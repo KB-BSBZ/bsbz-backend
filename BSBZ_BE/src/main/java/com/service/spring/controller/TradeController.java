@@ -27,6 +27,7 @@ public class TradeController {
 			User user = new User(tradeLog.getUserId());
 			Product product = new Product(tradeLog.getProductId());
 			tradeLogService.trade(user, product, tradeLog.getTradeRoyalCnt());
+			System.out.println(tradeLog + "거래 성공");
 			
 			return new ResponseEntity(HttpStatus.OK);
 		} catch (Exception e) {

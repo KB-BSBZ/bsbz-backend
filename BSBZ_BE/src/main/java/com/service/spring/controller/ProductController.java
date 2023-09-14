@@ -166,7 +166,7 @@ public class ProductController {
 	public ResponseEntity<String> updateProductInfo(@RequestBody Product product) {
 
 		try {
-
+			
 			productService.updateProductInfo(product);
 
 			return new ResponseEntity(HttpStatus.OK);
@@ -174,6 +174,27 @@ public class ProductController {
 			// 실패 시 응답 (예: BadRequest)
 			System.out.println("정보 수정 실패 오류...");
 			return ResponseEntity.badRequest().body("정보 수정 실패...");
+		}
+	}	
+	@GetMapping("/serch")
+	public ResponseEntity<String> searchProduct(@RequestParam("word") String word, @RequestParam("orderType") String orderType) {
+
+		try {
+			System.out.println("상품 상세정보 컨트롤러 진입 성공");
+			// 파라미터 잘 받았는지 확인
+			System.out.println("word :: " + word);
+			System.out.println("orderType :: " + orderType);
+
+			// 로직 진입 전
+			
+			List<Product> productList = productService.searchProduct(word, orderType);
+			System.out.println(productList);
+			// 리엑트로 응답하기
+			return new ResponseEntity(productList, HttpStatus.OK);
+		} catch (Exception e) {
+			// 실패 시 응답 (예: BadRequest)
+			System.out.println("상세정보 조회 실패 오류...");
+			return ResponseEntity.badRequest().body("상세정보 조회 실패...");
 		}
 	}
 

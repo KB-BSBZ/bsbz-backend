@@ -29,7 +29,7 @@ public class UserTest {
 
 		System.out.println("========1. register User ==============");
 		User user = new User();
-		user.setUserId("lcy923");
+		user.setUserId("jyh9898");
 		user.setPassword("jyh9898");
 		user.setEmail("jyh9898@gmail.com");
 		user.setSsn("001234-0000000");
@@ -58,6 +58,7 @@ public class UserTest {
 		System.out.println("회원님은 상위 " + userDAO.userRanking(user)+"% 입니다.");
 		System.out.println("회원님이 이번 달에 받을 수 있는 배당금은 " +
 		userDAO.showBonus(user)+"원 입니다.");
+		System.out.println(user);
 		 
 /*
 		System.out.println("========3. 외부계좌 등록합니다 ==============");

@@ -1,6 +1,7 @@
 package com.service.spring.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,14 +12,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.service.spring.domain.ExternalAccount;
 import com.service.spring.domain.TradeLog;
 import com.service.spring.domain.User;
 import com.service.spring.service.UserService;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:9999" }, allowCredentials = "true")
 @RequestMapping("/user")
@@ -109,8 +116,10 @@ public class UserController {
 
 		try {
 			System.out.println("배당금 조회 로직 실행 전");
+			System.out.println(user);
 			int bonus = userService.showBonus(user);
 			System.out.println("배당금 조회 로직 실행 성공");
+			System.out.println(bonus);
 
 			return new ResponseEntity(bonus, HttpStatus.OK);
 
@@ -181,7 +190,7 @@ public class UserController {
 			System.out.println("거래 로그 조회 성공");
 			
 			return new ResponseEntity(userTradeLog, HttpStatus.OK);
-
+			
 		} catch (Exception e) {
 			// 실패 시 응답 (예: BadRequest)
 			System.out.println("거래로그 조회 실패...");
@@ -189,13 +198,19 @@ public class UserController {
 		}
 	}
 	
+	@ResponseBody
 	@PostMapping("/update/account/add")
-	public ResponseEntity<String> addAccount(@RequestBody User user, String externalAccount) {
-
+	public ResponseEntity<String> addAccount(@RequestBody Map response) {
+		
 		try {
-
+			System.out.println(response);
+			System.out.println(response.get("exAccount"));
 			System.out.println("타은행 계좌 추가 로직 실행 전");
-			userService.addExternalAccount(user, externalAccount);
+			User u = new User();
+			String userId = (String)response.get("userId");
+			String exAccount = (String)response.get("exAccount");
+			u.setUserId(userId);
+			userService.addExternalAccount(u, exAccount);
 			System.out.println("타은행 계좌 추가 성공");
 			
 			return new ResponseEntity(HttpStatus.OK);
@@ -206,14 +221,19 @@ public class UserController {
 			return ResponseEntity.badRequest().body("타은행 계좌 추가 실패...");
 		}
 	}
-	
+	@ResponseBody
 	@DeleteMapping("/update/account/delete")
-	public ResponseEntity<String> deleteAccount(@RequestBody User user, String externalAccount) {
+	public ResponseEntity<String> deleteAccount(@RequestBody Map response) {
 
 		try {
-
+			System.out.println(response);
+			System.out.println(response.get("exAccount"));
 			System.out.println("타은행 계좌 삭제 로직 실행 전");
-			userService.deleteExternalAccount(user, externalAccount);
+			User u = new User();
+			String userId = (String)response.get("userId");
+			String exAccount = (String)response.get("exAccount");
+			u.setUserId(userId);
+			userService.deleteExternalAccount(u, exAccount);
 			System.out.println("타은행 계좌 삭제 성공");
 			
 			return new ResponseEntity(HttpStatus.OK);
@@ -224,5 +244,21 @@ public class UserController {
 			return ResponseEntity.badRequest().body("타은행 계좌 삭제 실패...");
 		}
 	}
+	
+	@PutMapping("/update")
+	public ResponseEntity<String> update(@RequestBody User user) {
+		try {
 
+			System.out.println(user);
+			userService.updateUserInfo(user);
+			System.out.println("회원 정보 수정 성공");
+			return new ResponseEntity(HttpStatus.OK);
+		} catch (Exception e) {
+			// 실패 시 응답 (예: BadRequest)
+			System.out.println("회원 정보 수정 실패...");
+			return ResponseEntity.badRequest().body("회원 정보 수정 실패");
+		}
+
+	}
+	
 }

@@ -43,6 +43,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void addExternalAccount(User user, String exAccount) {
+		System.out.println("at service :" + exAccount);
 		ExternalAccount ea = new ExternalAccount(user.getUserId(), exAccount);
 		System.out.println(ea);
 		sqlSession.insert(NS + "addExternalAccount", ea);
@@ -52,7 +53,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void deleteExternalAccount(User user, String exAccount) {
 		ExternalAccount ea = new ExternalAccount(user.getUserId(), exAccount);
-		sqlSession.insert(NS + "deleteExternalAccount", ea);
+		sqlSession.delete(NS + "deleteExternalAccount", ea);
 	}
 
 	@Override
