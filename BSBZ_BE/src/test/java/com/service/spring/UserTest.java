@@ -31,7 +31,7 @@ public class UserTest {
 
 		System.out.println("========1. register User ==============");
 		User user = new User();
-		user.setUserId("lcy923");
+		user.setUserId("lcy");
 		user.setPassword("jyh9898");
 		user.setEmail("jyh9898@gmail.com");
 		user.setSsn("001234-0000000");
@@ -63,8 +63,8 @@ public class UserTest {
 		System.out.println(user);
 		
 		//그래프용 테스트 조회
-		List<TradeLog> list = userDAO.totalRoyalsDaily(user);
-		System.out.println(list);
+//		List<TradeLog> list = userDAO.totalRoyalsDaily(user);
+//		System.out.println(list);
 /*
 		System.out.println("========3. 외부계좌 등록합니다 ==============");
 		// 외부계좌 등록
@@ -97,20 +97,21 @@ public class UserTest {
 //		tradeLogDAO.trade(user, product, 3);
 //		tradeLogDAO.trade(user, product, -1);
 
-/*
-		System.out.println("========6. 구매한 내역 전부 출력 ==============");
-		List<TradeLog> temp = userDAO.userTradeLog(user);
-		for (TradeLog t : temp) {
-			System.out.println(t.toString());
-		}
+
+//		System.out.println("========6. 구매한 내역 전부 출력 ==============");
+//		List<TradeLog> temp = userDAO.userTradeLog(user);
+//		for (TradeLog t : temp) {
+//			System.out.println(t.toString());
+//		}
 
 		System.out.println("========7. 보유하고 있는 항목 출력 ==============");
 		System.out.println(user.getUserId() + "님의 총 보유 로얄 수 : " + userDAO.totalRoyals(user));
 
 		List<TradeLog> temp2 = userDAO.ownProducts(user);
 		for (TradeLog t : temp2) {
+			System.out.println("다음");
 			System.out.println(t.toString());
 		}
-*/
+
 	}
 }

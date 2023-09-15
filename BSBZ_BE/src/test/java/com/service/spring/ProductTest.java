@@ -43,8 +43,8 @@ public class ProductTest {
 		// productDAO.updateProductInfo(temp);
 
 		// System.out.println("=============== 검색어로 상품 검색하기 ===============");
-		for (Product p : productDAO.searchProduct("ba", ""))
-			System.out.println(p);
+//		for (Product p : productDAO.searchProduct("ba", ""))
+//			System.out.println(p);
 		
 		System.out.println("=============== 부동산 추천 상품 띄워주기 ===============");
 		for (Product p : productDAO.recommendRealEstateProducts())
