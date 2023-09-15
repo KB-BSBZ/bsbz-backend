@@ -8,6 +8,7 @@ class BsbzBeApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
 
 }

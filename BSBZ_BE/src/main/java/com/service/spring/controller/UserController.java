@@ -296,4 +296,22 @@ public class UserController {
 
 	}
 	
+	
+	@PostMapping("/totalroyalsDaily")
+	public ResponseEntity<String> totalroyalsDaily(@RequestBody User user) {
+
+		try {
+			System.out.println("그래프용 총 로얄 수 조회 로직 실행 전");
+			List<TradeLog> totalRoyals = userService.totalRoyalsDaily(user);
+			System.out.println("그래프용 총 로얄 수 조회 성공");
+			
+			return new ResponseEntity(totalRoyals, HttpStatus.OK);
+
+		} catch (Exception e) {
+			// 실패 시 응답 (예: BadRequest)
+			System.out.println("그래프용 총 로얄 수 조회 실패...");
+			return ResponseEntity.badRequest().body("그래프용 총 로얄 수 조회 로직 실행 전 조회 실패...");
+		}
+	}
+	
 }

@@ -10,8 +10,10 @@ public class TradeLog {
 	
 	private Product product;
 	
+	private int sumRoyal;
+	
 	public TradeLog(int tradelogId, int productId, String userId, String tradeDate, int tradeRoyalCnt,
-			Product product) {
+			Product product, int sumRoyal) {
 		super();
 		this.tradelogId = tradelogId;
 		this.productId = productId;
@@ -19,9 +21,15 @@ public class TradeLog {
 		this.tradeDate = tradeDate;
 		this.tradeRoyalCnt = tradeRoyalCnt;
 		this.product = product;
+		this.sumRoyal = sumRoyal;
 	}
 
 	public TradeLog() {};
+	
+	public TradeLog(String tradeDate, int sumRoyal) {
+		this.tradeDate = tradeDate;
+		this.sumRoyal = sumRoyal;
+	}
 	
 	public TradeLog(int productId, String userId, int tradeRoyalCnt) {
 		this.productId = productId;
@@ -34,6 +42,14 @@ public class TradeLog {
 		this.productId = productId;
 		this.userId = userId;
 		this.tradeRoyalCnt = tradeRoyalCnt;
+	}
+	
+	public int getSumRoyal() {
+		return sumRoyal;
+	}
+
+	public void setSumRoyal(int sumRoyal) {
+		this.sumRoyal = sumRoyal;
 	}
 
 	public int getTradelogId() {
@@ -87,7 +103,7 @@ public class TradeLog {
 	@Override
 	public String toString() {
 		return "TradeLog [tradelogId=" + tradelogId + ", productId=" + productId + ", userId=" + userId + ", tradeDate="
-				+ tradeDate + ", tradeRoyalCnt=" + tradeRoyalCnt + ", \n" + product + "]\n";
+				+ tradeDate + ", tradeRoyalCnt=" + tradeRoyalCnt + ", \n" + product +", \n" + sumRoyal + "]\n";
 	}
 
 	

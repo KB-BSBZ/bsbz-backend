@@ -1,6 +1,7 @@
 package com.service.spring.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.service.spring.domain.TradeLog;
 import com.service.spring.domain.User;
@@ -45,4 +46,8 @@ public interface UserDAO {
 	
 	// 회원 탈퇴
 	void deleteUser(User user) throws Exception;
+	
+//	List<Integer> totalRoyalsDaily(User user)throws Exception;
+	
+	List<TradeLog> totalRoyalsDaily(User user)throws Exception;
 }

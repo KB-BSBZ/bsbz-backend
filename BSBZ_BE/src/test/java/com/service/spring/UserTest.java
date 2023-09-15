@@ -1,6 +1,7 @@
 package com.service.spring;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.service.spring.dao.UserDAO;
 import com.service.spring.domain.Product;
 import com.service.spring.domain.TradeLog;
 import com.service.spring.domain.User;
+
 
 @SpringBootTest
 @Transactional
@@ -29,7 +31,7 @@ public class UserTest {
 
 		System.out.println("========1. register User ==============");
 		User user = new User();
-		user.setUserId("jyh9898");
+		user.setUserId("lcy923");
 		user.setPassword("jyh9898");
 		user.setEmail("jyh9898@gmail.com");
 		user.setSsn("001234-0000000");
@@ -39,7 +41,7 @@ public class UserTest {
 		//userDAO.deleteUser(user);
 		
 		Product product = new Product();
-		product.setProductId(1);
+		product.setProductId(11);
 
 		System.out.println("========1-1. ID Exist ==============");
 		// 아이디 중복 확인
@@ -59,7 +61,10 @@ public class UserTest {
 		System.out.println("회원님이 이번 달에 받을 수 있는 배당금은 " +
 		userDAO.showBonus(user)+"원 입니다.");
 		System.out.println(user);
-		 
+		
+		//그래프용 테스트 조회
+		List<TradeLog> list = userDAO.totalRoyalsDaily(user);
+		System.out.println(list);
 /*
 		System.out.println("========3. 외부계좌 등록합니다 ==============");
 		// 외부계좌 등록
@@ -88,9 +93,9 @@ public class UserTest {
 		System.out.println("회원정보 수정 완료");
 */
 
-		//System.out.println("========5. 거래 진행합니다 ==============");
-		//tradeLogDAO.trade(user, product, 3);
-		//tradeLogDAO.trade(user, product, -1);
+//		System.out.println("========5. 거래 진행합니다 ==============");
+//		tradeLogDAO.trade(user, product, 3);
+//		tradeLogDAO.trade(user, product, -1);
 
 /*
 		System.out.println("========6. 구매한 내역 전부 출력 ==============");

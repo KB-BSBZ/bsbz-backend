@@ -76,6 +76,7 @@
 		<result property="userId" column="user_id" />
 		<result property="productId" column="product_id" />
 		<result property="tradeRoyalCnt" column="trade_royal_cnt" />
+		<result property="sumRoyal" column="royal_cnt" />
 		<association property="product" javaType="product">
 			<id property="productId" column="product_id" />
 			<result property="productName" column="product_name" />
@@ -152,6 +153,50 @@
 		product p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
 		WHERE p.product_id=t.product_id
 	</select>
+	
+	
+<!-- 	<select id="totalRoyalsDaily" parameterType="user" resultType="int">
+	    SELECT
+	        SUM(DAILY_ROYAL_CNT) OVER (ORDER BY TRUNCATED_DATE)
+	    FROM (
+	        SELECT
+	            TRUNC(TRADE_DATE) AS TRUNCATED_DATE,
+	            SUM(TRADE_ROYAL_CNT) AS DAILY_ROYAL_CNT
+	        FROM
+	            TradeLog
+	        WHERE
+	            user_id = #{userId}
+	        GROUP BY
+	            TRUNC(TRADE_DATE)
+	        ORDER BY
+	            TRUNC(TRADE_DATE)
+	    ) DailyRoyals
+	    ORDER BY
+	        TRUNCATED_DATE
+	</select> -->
+	
+	<select id="totalRoyalsDaily" parameterType="user" resultMap="tradeLogWithProduct">
+	    SELECT
+	    	TRUNCATED_DATE as trade_date,
+	        SUM(DAILY_ROYAL_CNT) OVER (ORDER BY TRUNCATED_DATE) as royal_cnt
+	    FROM (
+	        SELECT
+	            TRUNC(TRADE_DATE) AS TRUNCATED_DATE,
+	            SUM(TRADE_ROYAL_CNT) AS DAILY_ROYAL_CNT
+	        FROM
+	            TradeLog
+	        WHERE
+	            user_id = #{userId}
+	        GROUP BY
+	            TRUNC(TRADE_DATE)
+	        ORDER BY
+	            TRUNC(TRADE_DATE)
+	    ) DailyRoyals
+	    ORDER BY
+	        TRUNCATED_DATE
+	</select>
+
+
 
 
 </mapper>

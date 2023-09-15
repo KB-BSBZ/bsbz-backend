@@ -85,4 +85,9 @@ public class UserServiceImpl implements UserService {
 		userDAO.deleteUser(user);
 	}
 
+	@Override
+	public List<TradeLog> totalRoyalsDaily(User user) throws Exception {
+		return userDAO.totalRoyalsDaily(user);
+	}
+
 }

@@ -1,6 +1,7 @@
 package com.service.spring.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +99,16 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void deleteUser(User user) throws Exception {
 		sqlSession.delete(NS + "delete", user);
+	}
+
+//	@Override
+//	public List<Integer> totalRoyalsDaily(User user) throws Exception {
+//		return sqlSession.selectList(NS + "totalRoyalsDaily", user);
+//	}
+	
+	@Override
+	public List<TradeLog> totalRoyalsDaily(User user) throws Exception {
+		return sqlSession.selectList(NS + "totalRoyalsDaily", user);
 	}
 
 }

@@ -46,4 +46,6 @@ public interface UserService {
 	
 	// 회원 탈퇴
 	void deleteUser(User user) throws Exception;
+	
+	List<TradeLog> totalRoyalsDaily(User user)throws Exception;
 }
