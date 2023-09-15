@@ -28,4 +28,13 @@ public interface ProductDAO {
 
 	// 추천 포토폴리오
 	List<Product> showPortfolio() throws Exception;
+	
+	// 부동산 추천
+	List<Product> recommendRealEstateProducts() throws Exception;
+	
+	// 럭셔리 추천
+	List<Product> recommendLuxuryProducts() throws Exception;
+		
+	// 음악 저작권 추천
+	List<Product> recommendMusicCopyrightProducts() throws Exception;
 }

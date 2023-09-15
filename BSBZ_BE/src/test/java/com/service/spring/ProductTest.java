@@ -19,11 +19,11 @@ public class ProductTest {
 	@Test
 	public void unitTest() throws Exception {
 		// 전체 상품 조회
-		// System.out.println("=============== 전체 상품 출력하기 ===============");
-		// for (Product t : productDAO.showAllProducts(""))
-		// System.out.println(t.toString());
-		// System.out.println();
-
+/*		System.out.println("=============== 전체 상품 출력하기 ===============");
+		for (Product t : productDAO.showAllProducts(""))
+		System.out.println(t.toString());
+		System.out.println();
+*/
 		// System.out.println("=============== 음악저작권 ===============");
 		// for (Product p : productDAO.showAllMusicCopyright(""))
 		// System.out.println(p);
@@ -44,6 +44,18 @@ public class ProductTest {
 
 		// System.out.println("=============== 검색어로 상품 검색하기 ===============");
 		for (Product p : productDAO.searchProduct("ba", ""))
+			System.out.println(p);
+		
+		System.out.println("=============== 부동산 추천 상품 띄워주기 ===============");
+		for (Product p : productDAO.recommendRealEstateProducts())
+			System.out.println(p);
+		
+		System.out.println("=============== 럭셔리 추천 상품 띄워주기 ===============");
+		for (Product p : productDAO.recommendLuxuryProducts())
+			System.out.println(p);
+		
+		System.out.println("=============== 음악저작권 추천 상품 띄워주기 ===============");
+		for (Product p : productDAO.recommendMusicCopyrightProducts())
 			System.out.println(p);
 
 	}

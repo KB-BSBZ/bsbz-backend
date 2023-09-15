@@ -62,4 +62,19 @@ public class ProductServiceImpl implements ProductService {
 		return null;
 	}
 
+	@Override
+	public List<Product> recommendRealEstateProducts() throws Exception {
+		return productDAO.recommendRealEstateProducts();
+	}
+
+	@Override
+	public List<Product> recommendLuxuryProducts() throws Exception {
+		return productDAO.recommendLuxuryProducts();
+	}
+
+	@Override
+	public List<Product> recommendMusicCopyrightProducts() throws Exception {
+		return productDAO.recommendMusicCopyrightProducts();
+	}
+	
 }

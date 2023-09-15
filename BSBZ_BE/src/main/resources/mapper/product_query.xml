@@ -108,4 +108,54 @@
 		product_id=#{productId}
 	</update>
 
+
+	<!-- 럭셔리 카테고리 상품 추천 -->
+
+	<select id="recommendLuxuryProducts" resultType="product">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT product_id, product_name, product_cost, product_type, total_royal, left_royal, register_date,
+               end_date, description, profile_url, image_url, extra, views
+        FROM product
+        WHERE product_type = 'luxury'
+        ORDER BY DBMS_RANDOM.VALUE
+    )
+    WHERE ROWNUM <= 5
+    ]]>
+	</select>
+
+
+	<!-- 부동산 카테고리에서 무작위로 최대 5개의 상품 가져오기 -->
+
+	<select id="recommendRealEstateProducts" resultType="product">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT product_id, product_name, product_cost, product_type, total_royal, left_royal, register_date,
+               end_date, description, profile_url, image_url, extra, views
+        FROM product
+        WHERE product_type = 'estate'
+        ORDER BY DBMS_RANDOM.VALUE
+    )
+    WHERE ROWNUM <= 5
+    ]]>
+	</select>
+
+	<!-- 음악 저작권 카테고리 상품 추천 -->
+
+	<select id="recommendMusicCopyrightProducts" resultType="product">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT product_id, product_name, product_cost, product_type, total_royal, left_royal, register_date,
+               end_date, description, profile_url, image_url, extra, views
+        FROM product
+        WHERE product_type = 'music'
+        ORDER BY DBMS_RANDOM.VALUE
+    )
+    WHERE ROWNUM <= 5
+    ]]>
+	</select>
+
 </mapper>

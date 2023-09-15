@@ -68,4 +68,19 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList(NS + "searchProduct", params);
 	}
 
+	@Override
+	public List<Product> recommendRealEstateProducts() throws Exception {
+		return sqlSession.selectList(NS + "recommendRealEstateProducts");
+	}
+
+	@Override
+	public List<Product> recommendLuxuryProducts() throws Exception {
+		return sqlSession.selectList(NS + "recommendLuxuryProducts");
+	}
+
+	@Override
+	public List<Product> recommendMusicCopyrightProducts() throws Exception {
+		return sqlSession.selectList(NS + "recommendMusicCopyrightProducts");
+	}
+
 }
