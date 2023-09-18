@@ -76,7 +76,7 @@ public class UserController {
 			String userId = userService.idExist(user.getUserId());
 			System.out.println("중복검사로직 진입 후... userId 값::" + userId);
 			System.out.println("userId값 확인 if 진입");
-			if (userId != null) {
+			if (userId == null) {
 				userService.register(user);
 				System.out.println("회원가입 성공");
 				return ResponseEntity.ok("회원가입 성공...로그인 화면으로 이동...");
