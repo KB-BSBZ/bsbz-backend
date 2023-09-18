@@ -197,5 +197,30 @@ public class ProductController {
 			return ResponseEntity.badRequest().body("상세정보 조회 실패...");
 		}
 	}
+	@GetMapping("/recommend")
+	public ResponseEntity<String> searchProduct(@RequestParam("orderType") String orderType) {
+
+		try {
+			System.out.println("상품 상세정보 컨트롤러 진입 성공");
+			// 파라미터 잘 받았는지 확인
+			System.out.println("orderType :: " + orderType);
+			List<Product> productList = null;
+			if(orderType.equals("부동산")) {
+				productList = productService.recommendRealEstateProducts();
+			}else if(orderType.equals("럭셔리")) {
+				productList = productService.recommendLuxuryProducts();
+			}else if(orderType.equals("음악 저작권")) {
+				productList = productService.recommendMusicCopyrightProducts();
+			}
+			
+			System.out.println(productList);
+			// 리엑트로 응답하기
+			return new ResponseEntity(productList, HttpStatus.OK);
+		} catch (Exception e) {
+			// 실패 시 응답 (예: BadRequest)
+			System.out.println("추천 상품 출력 오류...");
+			return ResponseEntity.badRequest().body("추천 상품 출력 실패...");
+		}
+	}
 
 }
