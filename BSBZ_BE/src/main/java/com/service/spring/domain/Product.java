@@ -97,14 +97,6 @@ public class Product {
 		this.leftRoyal = leftRoyal;
 	}
 
-	public int getLeft_royal() {
-		return this.leftRoyal;
-	}
-
-	public void setLeft_royal(int leftRoyal) {
-		this.leftRoyal = leftRoyal;
-	}
-	
 	public String getRegisterDate() {
 		return registerDate;
 	}
@@ -177,6 +169,5 @@ public class Product {
 				+ ", profileUrl=" + profileUrl + ", imageUrl=" + imageUrl + ", extra=" + extra + ", views=" + views
 				+ ", isDone=" + isDone + "]";
 	}
-
 
 }
