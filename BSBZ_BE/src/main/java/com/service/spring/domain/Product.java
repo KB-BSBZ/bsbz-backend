@@ -15,16 +15,34 @@ public class Product {
 	private String imageUrl;
 	private String extra;
 	private int views;
+	private int isDone;
 
 	public Product() {
 	};
 
-	public Product(int productId) {
+	public Product(int productId, String productName, String productType, long productCost, int bonus, int totalRoyal,
+			int leftRoyal, String registerDate, String endDate, String description, String profileUrl, String imageUrl,
+			String extra, int views, int isDone) {
+		super();
 		this.productId = productId;
+		this.productName = productName;
+		this.productType = productType;
+		this.productCost = productCost;
+		this.bonus = bonus;
+		this.totalRoyal = totalRoyal;
+		this.leftRoyal = leftRoyal;
+		this.registerDate = registerDate;
+		this.endDate = endDate;
+		this.description = description;
+		this.profileUrl = profileUrl;
+		this.imageUrl = imageUrl;
+		this.extra = extra;
+		this.views = views;
+		this.isDone = isDone;
 	}
 
 	public int getProductId() {
-		return this.productId;
+		return productId;
 	}
 
 	public void setProductId(int productId) {
@@ -32,7 +50,7 @@ public class Product {
 	}
 
 	public String getProductName() {
-		return this.productName;
+		return productName;
 	}
 
 	public void setProductName(String productName) {
@@ -40,7 +58,7 @@ public class Product {
 	}
 
 	public String getProductType() {
-		return this.productType;
+		return productType;
 	}
 
 	public void setProductType(String productType) {
@@ -48,15 +66,15 @@ public class Product {
 	}
 
 	public long getProductCost() {
-		return this.productCost;
+		return productCost;
 	}
 
-	public void setProductCost(int productCost) {
+	public void setProductCost(long productCost) {
 		this.productCost = productCost;
 	}
 
 	public int getBonus() {
-		return this.bonus;
+		return bonus;
 	}
 
 	public void setBonus(int bonus) {
@@ -64,11 +82,19 @@ public class Product {
 	}
 
 	public int getTotalRoyal() {
-		return this.totalRoyal;
+		return totalRoyal;
 	}
 
 	public void setTotalRoyal(int totalRoyal) {
 		this.totalRoyal = totalRoyal;
+	}
+
+	public int getLeftRoyal() {
+		return leftRoyal;
+	}
+
+	public void setLeftRoyal(int leftRoyal) {
+		this.leftRoyal = leftRoyal;
 	}
 
 	public int getLeft_royal() {
@@ -78,9 +104,9 @@ public class Product {
 	public void setLeft_royal(int leftRoyal) {
 		this.leftRoyal = leftRoyal;
 	}
-
+	
 	public String getRegisterDate() {
-		return this.registerDate;
+		return registerDate;
 	}
 
 	public void setRegisterDate(String registerDate) {
@@ -88,7 +114,7 @@ public class Product {
 	}
 
 	public String getEndDate() {
-		return this.endDate;
+		return endDate;
 	}
 
 	public void setEndDate(String endDate) {
@@ -96,7 +122,7 @@ public class Product {
 	}
 
 	public String getDescription() {
-		return this.description;
+		return description;
 	}
 
 	public void setDescription(String description) {
@@ -104,7 +130,7 @@ public class Product {
 	}
 
 	public String getProfileUrl() {
-		return this.profileUrl;
+		return profileUrl;
 	}
 
 	public void setProfileUrl(String profileUrl) {
@@ -112,7 +138,7 @@ public class Product {
 	}
 
 	public String getImageUrl() {
-		return this.imageUrl;
+		return imageUrl;
 	}
 
 	public void setImageUrl(String imageUrl) {
@@ -120,7 +146,7 @@ public class Product {
 	}
 
 	public String getExtra() {
-		return this.extra;
+		return extra;
 	}
 
 	public void setExtra(String extra) {
@@ -135,13 +161,22 @@ public class Product {
 		this.views = views;
 	}
 
+	public int getIsDone() {
+		return isDone;
+	}
+
+	public void setIsDone(int isDone) {
+		this.isDone = isDone;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", productName=" + productName + ", productType=" + productType
 				+ ", productCost=" + productCost + ", bonus=" + bonus + ", totalRoyal=" + totalRoyal + ", leftRoyal="
 				+ leftRoyal + ", registerDate=" + registerDate + ", endDate=" + endDate + ", description=" + description
 				+ ", profileUrl=" + profileUrl + ", imageUrl=" + imageUrl + ", extra=" + extra + ", views=" + views
-				+ "]";
+				+ ", isDone=" + isDone + "]";
 	}
+
 
 }

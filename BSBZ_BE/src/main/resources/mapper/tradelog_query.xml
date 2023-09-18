@@ -13,7 +13,7 @@
         VALUES (#{tradelogId},sysdate, #{tradeRoyalCnt},#{productId}, #{userId})
     </insert>
     
-<!--     구매/환불 기록 추가시 회원 거래 횟수 +1 -->
+<!-- 구매/환불 기록 추가시 회원 거래 횟수 +1 -->
     <update id="updateTradeCnt" parameterType="tradelog">
         UPDATE users SET
         trade_cnt=trade_cnt+1
