@@ -27,6 +27,15 @@ public class User {
 		this.phoneNum = phoneNum;
 		this.tradeCnt = tradeCnt;
 	}
+	public User(String userId, String password, String email, String userName, String ssn, String phoneNum) {
+		super();
+		this.userId = userId;
+		this.password = password;
+		this.email = email;
+		this.userName = userName;
+		this.ssn = ssn;
+		this.phoneNum = phoneNum;
+	}
 
 	public String getUserId() {
 		return userId;

@@ -180,14 +180,14 @@ public class UserController {
 			
 			for(TradeLog p : ownProducts) {
 				if(p.getProduct().getProductType().equals("estate")){
-					list.put("estate", list.get("estate") + 1);
+					list.put("estate", list.get("estate") + p.getTradeRoyalCnt());
 				}else if(p.getProduct().getProductType().equals("music")) {
-					list.put("music", list.get("music") + 1);
+					list.put("music", list.get("music") + p.getTradeRoyalCnt());
 				}else if(p.getProduct().getProductType().equals("luxury")) {
-					list.put("luxury", list.get("luxury") + 1);
+					list.put("luxury", list.get("luxury") + p.getTradeRoyalCnt());
 				}
 			}
-			
+			System.out.println(list);
 			return new ResponseEntity(list, HttpStatus.OK);
 			
 		} catch (Exception e) {
@@ -297,7 +297,7 @@ public class UserController {
 	}
 	
 	
-	@PostMapping("/totalroyalsDaily")
+	@PostMapping("/ownproducts/totalroyalsDaily")
 	public ResponseEntity<String> totalroyalsDaily(@RequestBody User user) {
 
 		try {
