@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -112,8 +114,8 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/bonus")
-	public ResponseEntity<String> bonus(@RequestBody User user) {
+	@GetMapping("/bonus")
+	public ResponseEntity<String> bonus(@ModelAttribute("user") User user) {
 
 		try {
 			System.out.println("배당금 조회 로직 실행 전");
@@ -131,11 +133,11 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/ranking")
-	public ResponseEntity<String> ranking(@RequestBody User user) {
+	@GetMapping("/ranking")
+	public ResponseEntity<String> ranking(@ModelAttribute("user") User user) {
 
 		try {
-			System.out.println("랭킹 조회 로직 실행 전");
+			System.out.println("랭킹 조회 로직 실행 전" + user);
 			int ranking = userService.userRanking(user);
 			System.out.println("랭킹 조회 로직 실행 성공");
 			
@@ -148,8 +150,8 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/ownproducts")
-	public ResponseEntity<String> ownProducts(@RequestBody User user) {
+	@GetMapping("/ownproducts")
+	public ResponseEntity<String> ownProducts(@ModelAttribute("user") User user) {
 
 		try {
 			System.out.println("보유하고 있는 품목 로그 조회 로직 실행 전");
@@ -165,8 +167,8 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/ownproducts/graph")
-	public ResponseEntity<String> ownProductsGraph(@RequestBody User user) {
+	@GetMapping("/ownproducts/graph")
+	public ResponseEntity<String> ownProductsGraph(@ModelAttribute("user") User user) {
 
 		try {
 			System.out.println("보유하고 있는 품목 로그 조회 로직 실행 전");
@@ -201,8 +203,8 @@ public class UserController {
 	
 	
 	
-	@PostMapping("/totalroyals")
-	public ResponseEntity<String> totalRoyals(@RequestBody User user) {
+	@GetMapping("/totalroyals")
+	public ResponseEntity<String> totalRoyals(@ModelAttribute("user") User user) {
 
 		try {
 			System.out.println("보유하고 총 로얄 수 조회 로직 실행 전");
@@ -218,8 +220,8 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/usertradeLog")
-	public ResponseEntity<String> userTradeLog(@RequestBody User user) {
+	@GetMapping("/usertradeLog")
+	public ResponseEntity<String> userTradeLog(@ModelAttribute("user") User user) {
 
 		try {
 			System.out.println("거래 로그 조회 로직 실행 전");
@@ -299,8 +301,8 @@ public class UserController {
 	}
 	
 	
-	@PostMapping("/ownproducts/totalroyalsDaily")
-	public ResponseEntity<String> totalroyalsDaily(@RequestBody User user) {
+	@GetMapping("/ownproducts/totalroyalsDaily")
+	public ResponseEntity<String> totalroyalsDaily(@ModelAttribute("user") User user) {
 
 		try {
 			System.out.println("그래프용 총 로얄 수 조회 로직 실행 전");
