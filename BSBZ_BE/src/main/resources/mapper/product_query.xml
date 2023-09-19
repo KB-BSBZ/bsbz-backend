@@ -27,13 +27,13 @@
 	<!-- 상품 필터링 -->
 	<sql id="order-product">
 		<if test="_parameter.equals('조회수')">
-			ORDER BY views DESC
+			ORDER BY is_done, views DESC
 		</if>
 		<if test="_parameter.equals('마감')">
-			ORDER BY left_royal
+			ORDER BY is_done, left_royal
 		</if>
 		<if test="_parameter.equals('')">
-			ORDER BY register_date
+			ORDER BY is_done, register_date
 		</if>
 	</sql>
 
