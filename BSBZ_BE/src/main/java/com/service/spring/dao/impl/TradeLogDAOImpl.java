@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.service.spring.dao.TradeLogDAO;
+import com.service.spring.domain.BBAccount;
 import com.service.spring.domain.Product;
 import com.service.spring.domain.TradeLog;
 import com.service.spring.domain.User;
@@ -21,7 +22,12 @@ public class TradeLogDAOImpl implements TradeLogDAO {
 	public void trade(User user, Product product, int tradeRoyalCnt) {
 		TradeLog tl = new TradeLog(product.getProductId(), user.getUserId(), tradeRoyalCnt);
 		System.out.println(tl);
-		int balance = sqlSession.selectOne(NS + "showBalance", user);
+		int balance = sqlSession.selectOne("sql.account.mapper.showBalance", user);
+		System.out.println("현재 잔액 :: " + balance);
+		System.out.println("user :: " + user);
+		BBAccount bbAccount = new BBAccount();
+		bbAccount.setAmount(-(tradeRoyalCnt * 10000));
+		bbAccount.setUserId(user.getUserId());
 		if(balance >= (tradeRoyalCnt * 10000)) {
 			sqlSession.insert(NS + "addTradeLog", tl);
 			System.out.println("sqlSession.insert(NS + \"addTradeLog\", tl); 성공");
@@ -29,7 +35,7 @@ public class TradeLogDAOImpl implements TradeLogDAO {
 			sqlSession.update(NS + "updateLeftRoyal", tl);
 			System.out.println("sqlSession.update(NS + \"updateLeftRoyal\", tl); 성공");
 			
-			sqlSession.update(NS + "update", -(tradeRoyalCnt * 10000));
+			sqlSession.update("sql.account.mapper.update", bbAccount);
 			System.out.println("돈 차감 성공");
 		}else {
 			System.out.println("돈 부족 거래 실패");

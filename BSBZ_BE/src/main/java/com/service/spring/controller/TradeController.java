@@ -32,23 +32,26 @@ public class TradeController {
 			user.setUserId(tradeLog.getUserId());
 			Product product = new Product();
 			product.setProductId(tradeLog.getProductId());
-			
+			int success = 1;
 			Product product2 = productServiceImpl.showDetail(product);
+			System.out.println("priduct2 가져오기 성공 ::" + product2);
 			if(product2.getLeftRoyal() >= tradeLog.getTradeRoyalCnt()) {
+				System.out.println("남은 로얄 수 ::" + product2.getLeftRoyal());
+				System.out.println("거래 할 로얄 수 ::" + tradeLog.getTradeRoyalCnt());
 				tradeLogService.trade(user, product, tradeLog.getTradeRoyalCnt());
 				System.out.println(tradeLog + "거래 성공");
 				
-				return new ResponseEntity(HttpStatus.OK);
+				return new ResponseEntity(success, HttpStatus.OK);
 			}else {
-				System.out.println("거래 실패");
-				return ResponseEntity.badRequest().body("거래 실패");
+				System.out.println("거래 실패 else");
+				return ResponseEntity.badRequest().body("거래 실패 else");
 			}
 			
 
 		} catch (Exception e) {
 			// 실패 시 응답 (예: BadRequest)
 			System.out.println("거래 실패...");
-			return ResponseEntity.badRequest().body("거래 실패");
+			return ResponseEntity.badRequest().body("거래 실패...");
 		}
 
 	}
