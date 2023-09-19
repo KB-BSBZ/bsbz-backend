@@ -318,4 +318,19 @@ public class UserController {
 		}
 	}
 	
+	@GetMapping("/userInfo")
+	public ResponseEntity<String> userInfo(@ModelAttribute("user") User user) {
+
+		try {
+			User userInfo = userService.login(user);
+			
+			return new ResponseEntity(userInfo, HttpStatus.OK);
+
+		} catch (Exception e) {
+			// 실패 시 응답 (예: BadRequest)
+			return ResponseEntity.badRequest().body("유저 정보 가져오기 실패...");
+		}
+	}
+	
+	
 }
