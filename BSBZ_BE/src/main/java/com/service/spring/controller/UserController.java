@@ -177,7 +177,8 @@ public class UserController {
 			list.put("estate", 0);
 	        list.put("music", 0);
 	        list.put("luxury", 0);
-			
+	        System.out.println("=======================");
+			System.out.println(ownProducts);
 			for(TradeLog p : ownProducts) {
 				if(p.getProduct().getProductType().equals("estate")){
 					list.put("estate", list.get("estate") + p.getTradeRoyalCnt());
@@ -187,6 +188,7 @@ public class UserController {
 					list.put("luxury", list.get("luxury") + p.getTradeRoyalCnt());
 				}
 			}
+			System.out.println("list 출력함:::::");
 			System.out.println(list);
 			return new ResponseEntity(list, HttpStatus.OK);
 			

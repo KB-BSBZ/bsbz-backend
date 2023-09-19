@@ -107,6 +107,7 @@
 		product p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
 		WHERE
 		p.product_id=t.product_id
+		ORDER BY t.trade_date DESC
 	</select>
 
 	<!-- 총 로얄 수 -->

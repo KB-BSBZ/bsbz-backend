@@ -208,7 +208,6 @@ public class UserInsertTest {
 		
 		tradeLogDAO.trade(user6, product24, 20);
 		
-		
-
+	
 	}
 }
