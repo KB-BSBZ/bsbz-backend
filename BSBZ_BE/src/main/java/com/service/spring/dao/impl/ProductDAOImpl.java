@@ -47,6 +47,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public Product showDetail(Product product) throws Exception {
 		// System.out.println(product.getProductId());
+		sqlSession.update(NS+"updateViews", product);
 		return sqlSession.selectOne(NS + "showDetail", product);
 	}
 

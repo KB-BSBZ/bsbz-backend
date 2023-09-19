@@ -108,9 +108,7 @@
 		product_id=#{productId}
 	</update>
 
-
 	<!-- 럭셔리 카테고리 상품 추천 -->
-
 	<select id="recommendLuxuryProducts" resultType="product">
     <![CDATA[
     SELECT *
@@ -125,9 +123,7 @@
     ]]>
 	</select>
 
-
 	<!-- 부동산 카테고리에서 무작위로 최대 5개의 상품 가져오기 -->
-
 	<select id="recommendRealEstateProducts" resultType="product">
     <![CDATA[
     SELECT *
@@ -143,8 +139,8 @@
 	</select>
 
 	<!-- 음악 저작권 카테고리 상품 추천 -->
-
-	<select id="recommendMusicCopyrightProducts" resultType="product">
+	<select id="recommendMusicCopyrightProducts"
+		resultType="product">
     <![CDATA[
     SELECT *
     FROM (
@@ -157,5 +153,13 @@
     WHERE ROWNUM <= 5
     ]]>
 	</select>
+
+	<update id="updateViews" parameterType="product">
+		UPDATE product
+		SET
+		views = views+1
+		WHERE
+		product_id=#{productId}
+	</update>
 
 </mapper>
