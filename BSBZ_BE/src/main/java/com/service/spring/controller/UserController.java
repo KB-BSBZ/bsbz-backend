@@ -351,5 +351,23 @@ public class UserController {
 		}
 	}
 	
+	@ResponseBody
+	@DeleteMapping("/delete")
+	public ResponseEntity<String> deleteUser(@RequestBody User user) {
+
+		try {
+			System.out.println("user 정보 ::" + user);
+			System.out.println("회원 탈퇴 로직 실행 전");
+			userService.deleteUser(user);
+			System.out.println("회원 탈퇴 성공");
+			
+			return new ResponseEntity(HttpStatus.OK);
+
+		} catch (Exception e) {
+			// 실패 시 응답 (예: BadRequest)
+			System.out.println("회원 탈퇴 실패...");
+			return ResponseEntity.badRequest().body("회원 탈퇴 실패...");
+		}
+	}
 	
 }
