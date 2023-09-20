@@ -133,7 +133,7 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/getExternalAccounts")
+	@GetMapping("/getexternalaccounts")
 	public ResponseEntity<String> externalAccounts(@ModelAttribute("user") User user) {
 
 		try {
