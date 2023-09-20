@@ -133,6 +133,25 @@ public class UserController {
 		}
 	}
 	
+	@GetMapping("/getExternalAccounts")
+	public ResponseEntity<String> externalAccounts(@ModelAttribute("user") User user) {
+
+		try {
+			System.out.println("전체 외부계좌 조회");
+			System.out.println(user);
+			List<ExternalAccount> temp = userService.selectExternalAccount(user);
+			System.out.println("배당금 조회 로직 실행 성공");
+			System.out.println(temp);
+
+			return new ResponseEntity(temp, HttpStatus.OK);
+
+		} catch (Exception e) {
+			// 실패 시 응답 (예: BadRequest)
+			System.out.println("외부계좌 조회 실패...");
+			return ResponseEntity.badRequest().body("외부계좌 조회 실패...");
+		}
+	}
+	
 	@GetMapping("/ranking")
 	public ResponseEntity<String> ranking(@ModelAttribute("user") User user) {
 

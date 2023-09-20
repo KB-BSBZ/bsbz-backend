@@ -2,6 +2,7 @@ package com.service.spring.service;
 
 import java.util.List;
 
+import com.service.spring.domain.ExternalAccount;
 import com.service.spring.domain.Product;
 import com.service.spring.domain.TradeLog;
 import com.service.spring.domain.User;
@@ -22,6 +23,9 @@ public interface UserService {
 
 	// 계좌 삭제
 	void deleteExternalAccount(User user, String exAccount);
+	
+	// 외부 계좌 조회
+	List<ExternalAccount> selectExternalAccount(User user) throws Exception;
 
 	// 회원 정보 수정 ... 비밀번호, 번호, 계좌 수정XXXX
 	void updateUserInfo(User user);

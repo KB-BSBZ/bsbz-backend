@@ -69,6 +69,11 @@
 		WHERE ex_account = #{exAccount} AND
 		user_id=#{userId}
 	</delete>
+	
+	<select id="selectExternalAccount" parameterType="user" resultType="externalAccount">
+		SELECT * from ExternalAccount
+		WHERE user_id=#{userId}
+	</select>
 
 	<resultMap type="tradeLog" id="tradeLogWithProduct">
 		<id property="tradelogId" column="tradelog_id" />

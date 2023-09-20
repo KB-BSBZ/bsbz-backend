@@ -111,4 +111,9 @@ public class UserDAOImpl implements UserDAO {
 		return sqlSession.selectList(NS + "totalRoyalsDaily", user);
 	}
 
+	@Override
+	public List<ExternalAccount> selectExternalAccount(User user) throws Exception{
+		return sqlSession.selectList(NS + "selectExternalAccount", user);
+	}
+
 }

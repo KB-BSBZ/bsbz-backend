@@ -3,6 +3,7 @@ package com.service.spring.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.service.spring.domain.ExternalAccount;
 import com.service.spring.domain.TradeLog;
 import com.service.spring.domain.User;
 
@@ -22,6 +23,9 @@ public interface UserDAO {
 
 	// 계좌 삭제
 	void deleteExternalAccount(User user, String exAccount);
+	
+	// 외부 계좌 조회
+	List<ExternalAccount> selectExternalAccount(User user) throws Exception;
 
 	// 회원 정보 수정 ... 비밀번호, 번호, 계좌 수정XXXX
 	void updateUserInfo(User user);
@@ -47,7 +51,6 @@ public interface UserDAO {
 	// 회원 탈퇴
 	void deleteUser(User user) throws Exception;
 	
-//	List<Integer> totalRoyalsDaily(User user)throws Exception;
-	
+	// 일별 로얄수
 	List<TradeLog> totalRoyalsDaily(User user)throws Exception;
 }

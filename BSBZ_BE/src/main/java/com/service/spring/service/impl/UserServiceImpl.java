@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.service.spring.dao.UserDAO;
+import com.service.spring.domain.ExternalAccount;
 import com.service.spring.domain.Product;
 import com.service.spring.domain.TradeLog;
 import com.service.spring.domain.User;
@@ -88,6 +89,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<TradeLog> totalRoyalsDaily(User user) throws Exception {
 		return userDAO.totalRoyalsDaily(user);
+	}
+
+	@Override
+	public List<ExternalAccount> selectExternalAccount(User user) throws Exception {
+		return userDAO.selectExternalAccount(user);
 	}
 
 }
