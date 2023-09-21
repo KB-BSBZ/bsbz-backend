@@ -69,8 +69,9 @@
 		WHERE ex_account = #{exAccount} AND
 		user_id=#{userId}
 	</delete>
-	
-	<select id="selectExternalAccount" parameterType="user" resultType="externalAccount">
+
+	<select id="selectExternalAccount" parameterType="user"
+		resultType="externalAccount">
 		SELECT * from ExternalAccount
 		WHERE user_id=#{userId}
 	</select>
@@ -109,7 +110,8 @@
 		p.image_url,
 		p.left_royal,p.register_date, p.end_date, p.extra, p.views
 		FROM
-		product p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
+		product
+		p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
 		WHERE
 		p.product_id=t.product_id
 		ORDER BY t.trade_date DESC
@@ -127,16 +129,17 @@
 	<!-- 보유하고 있는 품목 로그 -->
 	<select id="ownProducts" parameterType="user"
 		resultMap="tradeLogWithProduct">
-		SELECT DISTINCT t.user_id, p.product_id,
-		p.product_name,p.product_type,
-		p.bonus,p.total_royal,p.profile_url,
-		p.image_url,
-		p.left_royal,p.register_date, p.end_date, p.extra, p.views,
-		SUM(t.trade_royal_cnt) OVER(PARTITION BY p.product_name)
-		trade_royal_cnt
-		FROM product p, (SELECT * FROM TradeLog WHERE
-		user_id=#{userId}) t
-		WHERE p.product_id=t.product_id
+  <![CDATA[
+  SELECT DISTINCT t.user_id, p.product_id,
+  p.product_name, p.product_type,
+  p.bonus, p.total_royal, p.profile_url,
+  p.image_url,
+  p.left_royal, p.register_date, p.end_date, p.extra, p.views,
+  SUM(t.trade_royal_cnt) OVER(PARTITION BY p.product_name) AS trade_royal_cnt
+  FROM product p
+  JOIN (SELECT * FROM TradeLog WHERE user_id=#{userId}) t ON p.product_id = t.product_id
+  WHERE t.trade_royal_cnt > 0
+  ]]>
 	</select>
 
 	<!-- 회원 탈퇴 -->
@@ -145,63 +148,57 @@
 		WHERE
 		user_id=#{userId}
 	</delete>
-	
+
 	<!-- 회원 등수 -->
 	<select id="userRanking" parameterType="user" resultType="int">
-		SELECT t.rate
-		FROM (SELECT user_id, user_name, 100-ROUND(RATIO_TO_REPORT(trade_cnt) OVER(), 2)*100 AS rate
-		FROM users) t
+		SELECT
+		t.rate
+		FROM (SELECT user_id, user_name,
+		100-ROUND(RATIO_TO_REPORT(trade_cnt) OVER(), 2)*100 AS rate
+		FROM users)
+		t
 		WHERE t.user_id=#{userId}
 	</select>
-	
+
 	<!-- 배당금 출력 -->
 	<select id="showBonus" parameterType="user" resultType="int">
-		SELECT SUM(t.trade_royal_cnt*p.bonus)
+		SELECT
+		SUM(t.trade_royal_cnt*p.bonus)
 		FROM
-		product p, (SELECT * FROM TradeLog WHERE user_id=#{userId}) t
+		product p, (SELECT * FROM TradeLog
+		WHERE user_id=#{userId}) t
 		WHERE p.product_id=t.product_id
 	</select>
-	
-	
-<!-- 	<select id="totalRoyalsDaily" parameterType="user" resultType="int">
-	    SELECT
-	        SUM(DAILY_ROYAL_CNT) OVER (ORDER BY TRUNCATED_DATE)
-	    FROM (
-	        SELECT
-	            TRUNC(TRADE_DATE) AS TRUNCATED_DATE,
-	            SUM(TRADE_ROYAL_CNT) AS DAILY_ROYAL_CNT
-	        FROM
-	            TradeLog
-	        WHERE
-	            user_id = #{userId}
-	        GROUP BY
-	            TRUNC(TRADE_DATE)
-	        ORDER BY
-	            TRUNC(TRADE_DATE)
-	    ) DailyRoyals
-	    ORDER BY
-	        TRUNCATED_DATE
-	</select> -->
-	
-	<select id="totalRoyalsDaily" parameterType="user" resultMap="tradeLogWithProduct">
-	    SELECT
-	    	TRUNCATED_DATE as trade_date,
-	        SUM(DAILY_ROYAL_CNT) OVER (ORDER BY TRUNCATED_DATE) as royal_cnt
-	    FROM (
-	        SELECT
-	            TRUNC(TRADE_DATE) AS TRUNCATED_DATE,
-	            SUM(TRADE_ROYAL_CNT) AS DAILY_ROYAL_CNT
-	        FROM
-	            TradeLog
-	        WHERE
-	            user_id = #{userId}
-	        GROUP BY
-	            TRUNC(TRADE_DATE)
-	        ORDER BY
-	            TRUNC(TRADE_DATE)
-	    ) DailyRoyals
-	    ORDER BY
-	        TRUNCATED_DATE
+
+
+	<!-- <select id="totalRoyalsDaily" parameterType="user" resultType="int"> 
+		SELECT SUM(DAILY_ROYAL_CNT) OVER (ORDER BY TRUNCATED_DATE) FROM ( SELECT 
+		TRUNC(TRADE_DATE) AS TRUNCATED_DATE, SUM(TRADE_ROYAL_CNT) AS DAILY_ROYAL_CNT 
+		FROM TradeLog WHERE user_id = #{userId} GROUP BY TRUNC(TRADE_DATE) ORDER 
+		BY TRUNC(TRADE_DATE) ) DailyRoyals ORDER BY TRUNCATED_DATE </select> -->
+
+	<select id="totalRoyalsDaily" parameterType="user"
+		resultMap="tradeLogWithProduct">
+		SELECT
+		TRUNCATED_DATE as trade_date,
+		SUM(DAILY_ROYAL_CNT) OVER
+		(ORDER BY TRUNCATED_DATE) as royal_cnt
+		FROM (
+		SELECT
+		TRUNC(TRADE_DATE) AS
+		TRUNCATED_DATE,
+		SUM(TRADE_ROYAL_CNT) AS DAILY_ROYAL_CNT
+		FROM
+		TradeLog
+		WHERE
+		user_id = #{userId}
+		GROUP BY
+		TRUNC(TRADE_DATE)
+		ORDER BY
+		TRUNC(TRADE_DATE)
+		) DailyRoyals
+		ORDER BY
+		TRUNCATED_DATE
 	</select>
 
 
