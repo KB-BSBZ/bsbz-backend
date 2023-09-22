@@ -211,6 +211,8 @@ public class ProductController {
 				productList = productService.recommendLuxuryProducts();
 			}else if(orderType.equals("음악 저작권")) {
 				productList = productService.recommendMusicCopyrightProducts();
+			}else if(orderType.equals("그냥")) {
+				productList = productService.recommendProducts();
 			}
 			
 			System.out.println(productList);

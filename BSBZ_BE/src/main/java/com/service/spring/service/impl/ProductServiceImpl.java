@@ -77,4 +77,9 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.recommendMusicCopyrightProducts();
 	}
 	
+	@Override
+	public List<Product> recommendProducts() throws Exception {
+		return productDAO.recommendProducts();
+	}
+	
 }

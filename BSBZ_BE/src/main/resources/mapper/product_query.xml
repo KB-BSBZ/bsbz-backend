@@ -153,6 +153,20 @@
     WHERE ROWNUM <= 5
     ]]>
 	</select>
+	
+	<select id="recommendProducts"
+		resultType="product">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT product_id, product_name, product_cost, product_type, total_royal, left_royal, register_date,
+               end_date, description, profile_url, image_url, extra, views
+        FROM product
+        ORDER BY DBMS_RANDOM.VALUE
+    )
+    WHERE ROWNUM <= 5
+    ]]>
+	</select>
 
 	<update id="updateViews" parameterType="product">
 		UPDATE product

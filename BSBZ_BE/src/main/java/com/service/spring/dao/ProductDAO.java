@@ -37,4 +37,7 @@ public interface ProductDAO {
 		
 	// 음악 저작권 추천
 	List<Product> recommendMusicCopyrightProducts() throws Exception;
+	
+	// 그냥 추천
+	List<Product> recommendProducts() throws Exception;
 }
